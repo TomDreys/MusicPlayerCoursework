@@ -11,7 +11,7 @@ public class SongService {
 
     public static void selectAll(List<Song> targetList, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT songID, FileURL, SongTitle, SongAlbum, ReleaseYear, TrackNumber FROM Songs ORDER BY x");
+        PreparedStatement statement = database.newStatement("SELECT songID, FileURL, SongTitle, SongAlbum, ReleaseYear, TrackNumber FROM Songs ORDER BY SongID");
 
         try {
             if (statement != null) {
@@ -34,7 +34,7 @@ public class SongService {
 
         Song result = null;
 
-        PreparedStatement statement = database.newStatement("SELECT SongID, FileURL, SongTitle, SongAlbum, ReleaseYear, TrackNumber FROM Songs WHERE id = ?");
+        PreparedStatement statement = database.newStatement("SELECT SongID, FileURL, SongTitle, SongAlbum, ReleaseYear, TrackNumber FROM Songs WHERE SongID = ?");
 
         try {
             if (statement != null) {
@@ -56,7 +56,7 @@ public class SongService {
 
     public static void deleteById(int id, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("DELETE FROM Songs WHERE id = ?");
+        PreparedStatement statement = database.newStatement("DELETE FROM Songs WHERE SongID = ?");
 
         try {
             if (statement != null) {

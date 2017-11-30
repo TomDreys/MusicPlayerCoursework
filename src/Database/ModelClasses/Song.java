@@ -41,4 +41,11 @@ public class Song {
     public int getTrackNumber() {
         return trackNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Song{" +
+                "songTitle='" + songTitle + '\'' +
+                '}';
+    }
 }
