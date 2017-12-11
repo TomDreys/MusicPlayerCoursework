@@ -1,4 +1,4 @@
 package Database.ModelClasses;
 
-public class ArtistService {
+public class PlaylistSong {
 }
