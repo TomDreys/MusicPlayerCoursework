@@ -1,4 +1,5 @@
 import static GUI.GUI.*;
+import static GUI.GUIBuilder.createGUI;
 
 import Database.DatabaseConnection;
 import Database.ModelClasses.SongService;
