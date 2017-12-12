@@ -2,7 +2,6 @@ package GUI;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
