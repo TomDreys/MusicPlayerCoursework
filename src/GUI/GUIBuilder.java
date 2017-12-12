@@ -43,8 +43,8 @@ public class GUIBuilder {
     {
         VBox paneVbox = new VBox();
 
-        HBox mainHbox = createMainHBox(gui);
         HBox menuHbox = createMenuBar(gui);
+        HBox mainHbox = createMainHBox(gui);
 
         paneVbox.getChildren().add(menuHbox);
         paneVbox.getChildren().add(mainHbox);
@@ -69,7 +69,10 @@ public class GUIBuilder {
         TableView songs = new TableView();
         HBox visualisationTab = createVisualiationTab(gui);
 
-        return new VBox();
+        leftVbox.getChildren().add(leftOptionBar);
+        leftVbox.getChildren().add(songs);
+        leftVbox.getChildren().add(visualisationTab);
+        return leftVbox;
     }
 
     public static HBox createLeftOptionBar(GUI gui)
@@ -108,15 +111,16 @@ public class GUIBuilder {
 
     public static HBox createMenuBar(GUI gui)
     {
-        MenuItem fileMenu = new MenuItem();
+        HBox menuHbox = new HBox();
+        MenuBar menuBar = new MenuBar();
+        Menu fileMenu = new Menu("File");
+        Menu editMenu = new Menu("Edit");
 
-        MenuItem editMenu = new MenuItem();
+        menuBar.getMenus().addAll(fileMenu,editMenu);
 
-        MenuItem viewMenu = new MenuItem();
+        menuHbox.getChildren().add(menuBar);
 
-        MenuItem helpMenu = new MenuItem();
-
-        return new HBox();
+        return menuHbox;
     }
 
     public static void createSongsTable(TableView songTable)

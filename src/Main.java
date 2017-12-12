@@ -20,8 +20,5 @@ public class Main extends Application{
         DatabaseConnection DBconnection = new DatabaseConnection("src/MusicPlayer.db");
 
         System.out.println(SongService.selectById(3, DBconnection).toString());
-
-
-
     }
 }
