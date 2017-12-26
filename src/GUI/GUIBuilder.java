@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
@@ -7,17 +8,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sun.plugin2.message.GetAppletMessage;
 
 
 public class GUIBuilder {
-
-
 
     public static GUI createGUI(Stage primaryStage) {
 
         GUI mainGUI = new GUI();
 
-        Pane root = GUIBuilder.createPane(mainGUI);
+        Pane root = createPane(mainGUI);
 
         Scene scene = new Scene(root, 1024, 768);
 
@@ -94,19 +94,74 @@ public class GUIBuilder {
     {
         HBox visualiationTab = new HBox();
         Label albumArtLabel = new Label();
+        Slider slider1 = new Slider();
+        slider1.setOrientation(Orientation.VERTICAL);
+        Slider slider2 = new Slider();
+        slider2.setOrientation(Orientation.VERTICAL);
+        Slider slider3 = new Slider();
+        slider3.setOrientation(Orientation.VERTICAL);
+        Slider slider4 = new Slider();
+        slider4.setOrientation(Orientation.VERTICAL);
+        Slider slider5 = new Slider();
+        slider5.setOrientation(Orientation.VERTICAL);
+        Slider slider6 = new Slider();
+        slider6.setOrientation(Orientation.VERTICAL);
+        Slider slider7 = new Slider();
+        slider7.setOrientation(Orientation.VERTICAL);
+        Slider slider8 = new Slider();
+        slider8.setOrientation(Orientation.VERTICAL);
+        Button channelButton = new Button();
 
         visualiationTab.getChildren().add(albumArtLabel);
+        visualiationTab.getChildren().addAll(slider1,slider2,slider3,slider4,slider5,slider6,slider7,slider8);
+        visualiationTab.getChildren().add(channelButton);
 
         return visualiationTab;
     }
 
     public static VBox createRightVBox(GUI gui)
     {
-        HBox topBar = new HBox();
+        VBox rightVbox = new VBox();
+        Button addPlaylistButton = new Button();
         TableView playlists = new TableView();
-        VBox controlPanel = new VBox();
-        return new VBox();
+        VBox controlPanel = createControlPanel(gui);
+
+        rightVbox.getChildren().add(addPlaylistButton);
+        rightVbox.getChildren().add(playlists);
+        rightVbox.getChildren().add(controlPanel);
+        return rightVbox;
     }
+
+    public static VBox createControlPanel(GUI gui)
+    {
+        VBox controlPanel = new VBox();
+        HBox playButtons = createPlayButtons();
+        Button playModeButton = new Button();
+        ProgressBar songProgress = new ProgressBar();
+        Slider volumeSlider = new Slider();
+
+        controlPanel.getChildren().add(playButtons);
+        controlPanel.getChildren().add(playModeButton);
+        controlPanel.getChildren().add(songProgress);
+        controlPanel.getChildren().add(volumeSlider);
+
+        return controlPanel;
+    }
+
+    public static HBox createPlayButtons()
+    {
+        HBox playButtons = new HBox();
+        Button rewindButton = new Button();
+        Button pauseButton = new Button();
+        Button skipButton = new Button();
+
+        playButtons.getChildren().add(rewindButton);
+        playButtons.getChildren().add(pauseButton);
+        playButtons.getChildren().add(skipButton);
+
+        return playButtons;
+    }
+
 
     public static HBox createMenuBar(GUI gui)
     {
@@ -122,26 +177,6 @@ public class GUIBuilder {
         return menuHbox;
     }
 
-    public static void createSongsTable(TableView songTable)
-    {
 
-    }
-
-    public static void createPlaylistsTable(TableView playlistTable)
-    {
-
-    }
-
-    public static void createPlayControlPanel(HBox playControlPanel)
-    {
-
-    }
-
-    public static void createMainControlPanel()
-    {
-        HBox playControlPanel = new HBox();
-        Slider volumeSlider = new Slider();
-        ProgressBar playProgressBar = new ProgressBar();
-    }
 
 }
