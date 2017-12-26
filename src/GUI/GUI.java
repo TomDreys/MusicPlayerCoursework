@@ -1,28 +1,82 @@
 package GUI;
 
+import Database.ModelClasses.Song;
+import com.sun.deploy.security.SecureStaticVersioning;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+
+import java.util.ArrayList;
+import java.util.jar.Attributes;
 
 public class GUI {
 
-    private static TableView songsTable;
-    private static TableView playlistsTable;
-    private static Button channelButton;
-    private static Button playButton;
-    private static Button playModeButton;
-    private static Slider volumeSlider;
-    private static TextField searchTextField;
-    private static ComboBox searchType;
-    private static ComboBox searchArea;
+    //attributes that require updating during use
+    public static TableView songsTable;
+    public static TableView playlistsTable;
+    public static Button channelButton;
+    public static Button playButton;
+    public static Button playModeButton;
 
-    private static Slider equalizerSlider1;
-    private static Slider equalizerSlider2;
-    private static Slider equalizerSlider3;
-    private static Slider equalizerSlider4;
-    private static Slider equalizerSlider5;
-    private static Slider equalizerSlider6;
-    private static Slider equalizerSlider7;
-    private static Slider equalizerSlider8;
-    private static Slider equalizerSlider9;
-    private static Slider equalizerSlider10;
+    //attributes that need their data read
+    public static Slider volumeSlider;
+    public static TextField searchTextField;
+    public static ComboBox searchType;
+    public static ComboBox searchArea;
+    public static Slider equalizerSlider1;
+    public static Slider equalizerSlider2;
+    public static Slider equalizerSlider3;
+    public static Slider equalizerSlider4;
+    public static Slider equalizerSlider5;
+    public static Slider equalizerSlider6;
+    public static Slider equalizerSlider7;
+    public static Slider equalizerSlider8;
+    public static Slider equalizerSlider9;
+    public static Slider equalizerSlider10;
+
+    public static void togglePlayButton()
+    {
+        if (playButton.getText() == "Pause")
+        {
+            playButton.setText("Play");
+        }
+        else
+        {
+            playButton.setText("Pause");
+        }
+    }
+
+    public static void togglePlayModeButton()
+    {
+        if (playModeButton.getText() == "Shuffle")
+        {
+            playModeButton.setText("Loop");
+        }
+        else
+        {
+            playModeButton.setText("Shuffle");
+        }
+    }
+
+    public static void toggleChannelButton()
+    {
+        if (channelButton.getText() == "Mono")
+        {
+            channelButton.setText("Stereo");
+        }
+        else
+        {
+            channelButton.setText("Mono");
+        }
+    }
+
+    public static void updateSongsTable(ObservableList<Song> songs)
+    {
+        songsTable.setItems(songs);
+    }
+
+    public static void updatePlaylistsTable()
+    {
+
+    }
 
 }
