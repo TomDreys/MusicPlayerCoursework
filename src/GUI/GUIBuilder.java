@@ -1,6 +1,8 @@
 package GUI;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
@@ -8,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sun.plugin2.message.GetAppletMessage;
 
 
 public class GUIBuilder {
@@ -23,6 +24,8 @@ public class GUIBuilder {
 
         primaryStage.setTitle("Music Player");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         primaryStage.show();
 
         return mainGUI;
@@ -41,6 +44,7 @@ public class GUIBuilder {
     public static VBox createPaneVbox(GUI gui)
     {
         VBox paneVbox = new VBox();
+        paneVbox.setSpacing(15);
 
         HBox menuHbox = createMenuBar(gui);
         HBox mainHbox = createMainHBox(gui);
@@ -64,17 +68,26 @@ public class GUIBuilder {
     public static VBox createLeftVBox(GUI gui)
     {
         VBox leftVbox = new VBox();
+        leftVbox.setPrefSize(700, 768);
+        leftVbox.setSpacing(5);
 
         HBox leftOptionBar = createLeftOptionBar(gui);
 
         TableView songs = new TableView();
         TableColumn trackNumber = new TableColumn("#");
+        trackNumber.setPrefWidth(40);
         TableColumn song = new TableColumn("Song");
+        song.setPrefWidth(170);
         TableColumn artist = new TableColumn("Artist");
+        artist.setPrefWidth(150);
         TableColumn album = new TableColumn("Album");
+        album.setPrefWidth(150);
         TableColumn length = new TableColumn("Length");
+        length.setPrefWidth(80);
         TableColumn addDate = new TableColumn("Add Date");
+        addDate.setPrefWidth(110);
         songs.getColumns().addAll(trackNumber,song,artist,album,length,addDate);
+        songs.setPrefHeight(540);
 
         HBox visualisationTab = createVisualiationTab(gui);
 
@@ -87,21 +100,35 @@ public class GUIBuilder {
     public static HBox createLeftOptionBar(GUI gui)
     {
         HBox LeftOptionBar = new HBox();
+        LeftOptionBar.setSpacing(20);
+        LeftOptionBar.setPrefWidth(700);
+        LeftOptionBar.setPadding(new Insets(0,0,0,5));
 
         TextField searchInputField = new TextField();
 
-        ChoiceBox searchTypeChoice = new ChoiceBox();
+        ComboBox searchTypeChoice = new ComboBox();
+        searchTypeChoice.setPromptText("Search By...");
+        searchTypeChoice.getItems().addAll("Song Title", "Album", "Artist","Release Year");
+
+        ComboBox searchAreaChoice = new ComboBox();
+        searchAreaChoice.setPromptText("In...");
+        searchAreaChoice.getItems().addAll("All Playlists", "Current Playlist");
 
         Button searchEnterButton = new Button();
         searchEnterButton.setText("Search");
 
         Button addNewSongButton = new Button();
         addNewSongButton.setText("Add Song");
+        VBox newSongVbox = new VBox();
+        newSongVbox.setAlignment(Pos.TOP_RIGHT);
+        newSongVbox.getChildren().add(addNewSongButton);
+        newSongVbox.setPrefWidth(170);
 
         LeftOptionBar.getChildren().add(searchInputField);
         LeftOptionBar.getChildren().add(searchTypeChoice);
+        LeftOptionBar.getChildren().add(searchAreaChoice);
         LeftOptionBar.getChildren().add(searchEnterButton);
-        LeftOptionBar.getChildren().add(addNewSongButton);
+        LeftOptionBar.getChildren().add(newSongVbox);
 
         return LeftOptionBar;
     }
@@ -109,7 +136,12 @@ public class GUIBuilder {
     public static HBox createVisualiationTab(GUI gui)
     {
         HBox visualiationTab = new HBox();
+        visualiationTab.setSpacing(35);
+
         Label albumArtLabel = new Label();
+        albumArtLabel.setMaxSize(130,130);
+        albumArtLabel.setMinSize(130,130);
+
         Slider slider1 = new Slider();
         slider1.setOrientation(Orientation.VERTICAL);
 
@@ -136,10 +168,13 @@ public class GUIBuilder {
 
         Button channelButton = new Button();
         channelButton.setText("Stereo");
+        HBox channelButtonHBox = new HBox();
+        channelButtonHBox.setAlignment(Pos.CENTER);
+        channelButtonHBox.getChildren().add(channelButton);
 
         visualiationTab.getChildren().add(albumArtLabel);
         visualiationTab.getChildren().addAll(slider1,slider2,slider3,slider4,slider5,slider6,slider7,slider8);
-        visualiationTab.getChildren().add(channelButton);
+        visualiationTab.getChildren().add(channelButtonHBox);
 
         return visualiationTab;
     }
@@ -147,9 +182,14 @@ public class GUIBuilder {
     public static VBox createRightVBox(GUI gui)
     {
         VBox rightVbox = new VBox();
+        rightVbox.setPrefSize(324, 768);
+        rightVbox.setSpacing(5);
 
         Button addPlaylistButton = new Button();
         addPlaylistButton.setText("New Playlist");
+        VBox playlistButtonVbox = new VBox();
+        playlistButtonVbox.setAlignment(Pos.TOP_RIGHT);
+        playlistButtonVbox.getChildren().add(addPlaylistButton);
 
         TableView playlists = new TableView();
         TableColumn playlist = new TableColumn("Playlist");
@@ -159,7 +199,7 @@ public class GUIBuilder {
 
         VBox controlPanel = createControlPanel(gui);
 
-        rightVbox.getChildren().add(addPlaylistButton);
+        rightVbox.getChildren().add(playlistButtonVbox);
         rightVbox.getChildren().add(playlists);
         rightVbox.getChildren().add(controlPanel);
         return rightVbox;
@@ -168,6 +208,9 @@ public class GUIBuilder {
     public static VBox createControlPanel(GUI gui)
     {
         VBox controlPanel = new VBox();
+        controlPanel.setAlignment(Pos.CENTER);
+        controlPanel.setSpacing(30);
+        controlPanel.setPadding(new Insets(50,0,0,0));
 
         HBox playButtons = createPlayButtons();
 
@@ -175,8 +218,10 @@ public class GUIBuilder {
         playModeButton.setText("Shuffle");
 
         ProgressBar songProgress = new ProgressBar();
+        songProgress.setMinWidth(200);
 
         Slider volumeSlider = new Slider();
+        volumeSlider.setMaxWidth(220);
 
         controlPanel.getChildren().add(playButtons);
         controlPanel.getChildren().add(playModeButton);
@@ -189,6 +234,8 @@ public class GUIBuilder {
     public static HBox createPlayButtons()
     {
         HBox playButtons = new HBox();
+        playButtons.setAlignment(Pos.CENTER);
+        playButtons.setSpacing(15);
 
         Button rewindButton = new Button();
         rewindButton.setText("Rewind");
@@ -210,8 +257,10 @@ public class GUIBuilder {
     public static HBox createMenuBar(GUI gui)
     {
         HBox menuHbox = new HBox();
+        menuHbox.setPrefWidth(1024);
 
         MenuBar menuBar = new MenuBar();
+        menuBar.setPrefWidth(1024);
         Menu fileMenu = new Menu("File");
         Menu editMenu = new Menu("Edit");
         menuBar.getMenus().addAll(fileMenu,editMenu);
