@@ -11,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
 public class GUIBuilder {
 
     public static GUI createGUI(Stage primaryStage) {
@@ -32,7 +31,7 @@ public class GUIBuilder {
     }
 
 
-    public static Pane createPane(GUI gui)
+    private static Pane createPane(GUI gui)
     {
         Pane root = new Pane();
 
@@ -41,7 +40,7 @@ public class GUIBuilder {
         return root;
     }
 
-    public static VBox createPaneVbox(GUI gui)
+    private static VBox createPaneVbox(GUI gui)
     {
         VBox paneVbox = new VBox();
         paneVbox.setSpacing(15);
@@ -55,7 +54,7 @@ public class GUIBuilder {
         return paneVbox;
     }
 
-    public static HBox createMainHBox(GUI gui)
+    private static HBox createMainHBox(GUI gui)
     {
         HBox mainHbox = new HBox();
         VBox leftVbox = createLeftVBox(gui);
@@ -65,7 +64,7 @@ public class GUIBuilder {
         return mainHbox;
     }
 
-    public static VBox createLeftVBox(GUI gui)
+    private static VBox createLeftVBox(GUI gui)
     {
         VBox leftVbox = new VBox();
         leftVbox.setPrefSize(700, 768);
@@ -97,7 +96,7 @@ public class GUIBuilder {
         return leftVbox;
     }
 
-    public static HBox createLeftOptionBar(GUI gui)
+    private static HBox createLeftOptionBar(GUI gui)
     {
         HBox LeftOptionBar = new HBox();
         LeftOptionBar.setSpacing(20);
@@ -133,10 +132,10 @@ public class GUIBuilder {
         return LeftOptionBar;
     }
 
-    public static HBox createVisualiationTab(GUI gui)
+    private static HBox createVisualiationTab(GUI gui)
     {
         HBox visualiationTab = new HBox();
-        visualiationTab.setSpacing(35);
+        visualiationTab.setSpacing(30);
 
         Label albumArtLabel = new Label();
         albumArtLabel.setMaxSize(130,130);
@@ -166,6 +165,12 @@ public class GUIBuilder {
         Slider slider8 = new Slider();
         slider8.setOrientation(Orientation.VERTICAL);
 
+        Slider slider9 = new Slider();
+        slider9.setOrientation(Orientation.VERTICAL);
+
+        Slider slider10 = new Slider();
+        slider10.setOrientation(Orientation.VERTICAL);
+
         Button channelButton = new Button();
         channelButton.setText("Stereo");
         HBox channelButtonHBox = new HBox();
@@ -173,13 +178,13 @@ public class GUIBuilder {
         channelButtonHBox.getChildren().add(channelButton);
 
         visualiationTab.getChildren().add(albumArtLabel);
-        visualiationTab.getChildren().addAll(slider1,slider2,slider3,slider4,slider5,slider6,slider7,slider8);
+        visualiationTab.getChildren().addAll(slider1,slider2,slider3,slider4,slider5,slider6,slider7,slider8,slider9, slider10);
         visualiationTab.getChildren().add(channelButtonHBox);
 
         return visualiationTab;
     }
 
-    public static VBox createRightVBox(GUI gui)
+    private static VBox createRightVBox(GUI gui)
     {
         VBox rightVbox = new VBox();
         rightVbox.setPrefSize(324, 768);
@@ -205,7 +210,7 @@ public class GUIBuilder {
         return rightVbox;
     }
 
-    public static VBox createControlPanel(GUI gui)
+    private static VBox createControlPanel(GUI gui)
     {
         VBox controlPanel = new VBox();
         controlPanel.setAlignment(Pos.CENTER);
@@ -231,7 +236,7 @@ public class GUIBuilder {
         return controlPanel;
     }
 
-    public static HBox createPlayButtons()
+    private static HBox createPlayButtons()
     {
         HBox playButtons = new HBox();
         playButtons.setAlignment(Pos.CENTER);
@@ -254,7 +259,7 @@ public class GUIBuilder {
     }
 
 
-    public static HBox createMenuBar(GUI gui)
+    private static HBox createMenuBar(GUI gui)
     {
         HBox menuHbox = new HBox();
         menuHbox.setPrefWidth(1024);
