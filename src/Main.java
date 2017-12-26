@@ -18,7 +18,7 @@ public class Main extends Application{
         createGUI(primaryStage);
 
         DatabaseConnection DBconnection = new DatabaseConnection("src/MusicPlayer.db");
-        System.out.println(SongService.selectById(2,DBconnection));
+        System.out.println(SongService.selectById(4,DBconnection));
 
     }
 }

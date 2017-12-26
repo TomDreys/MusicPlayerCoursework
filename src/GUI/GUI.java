@@ -1,12 +1,9 @@
 package GUI;
 
 import Database.ModelClasses.Song;
-import com.sun.deploy.security.SecureStaticVersioning;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 
-import java.util.ArrayList;
-import java.util.jar.Attributes;
 
 public class GUI {
 

@@ -5,11 +5,11 @@ public class Song {
     int songID;
     String fileURL;
     String songTitle;
-    int songAlbum;
+    String songAlbum;
     String releaseYear;
     int trackNumber;
 
-    public Song(int songID, String fileURL, String songTitle, int songAlbum, String releaseYear, int trackNumber) {
+    public Song(int songID, String fileURL, String songTitle, String songAlbum, String releaseYear, int trackNumber) {
         this.songID = songID;
         this.fileURL = fileURL;
         this.songTitle = songTitle;
@@ -22,7 +22,7 @@ public class Song {
         return songID;
     }
 
-    public int getSongAlbum() {
+    public String getSongAlbum() {
         return songAlbum;
     }
 
@@ -45,7 +45,12 @@ public class Song {
     @Override
     public String toString() {
         return "Song{" +
-                "songTitle='" + songTitle + '\'' +
+                "songID=" + songID +
+                ", fileURL='" + fileURL + '\'' +
+                ", songTitle='" + songTitle + '\'' +
+                ", songAlbum='" + songAlbum + '\'' +
+                ", releaseYear='" + releaseYear + '\'' +
+                ", trackNumber=" + trackNumber +
                 '}';
     }
 }

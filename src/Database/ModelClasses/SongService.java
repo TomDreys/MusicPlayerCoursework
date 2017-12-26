@@ -21,7 +21,7 @@ public class SongService {
                 if (results != null) {
                     while (results.next()) {
                         targetList.add(new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                                , results.getInt("SongAlbum"), results.getString("ReleaseYear"), results.getInt("TrackNumber")));
+                                , results.getString("SongAlbum"), results.getString("ReleaseYear"), results.getInt("TrackNumber")));
                     }
                 }
             }
@@ -44,7 +44,7 @@ public class SongService {
 
                 if (results != null) {
                     result = new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                            , results.getInt("SongAlbum"), results.getString("ReleaseYear"), results.getInt("TrackNumber"));
+                            , results.getString("SongAlbum"), results.getString("ReleaseYear"), results.getInt("TrackNumber"));
                 }
             }
         } catch (SQLException resultsException) {
@@ -79,7 +79,7 @@ public class SongService {
                 statement.setInt(1, itemToSave.getSongID());
                 statement.setString(2, itemToSave.getFileURL());
                 statement.setString(3, itemToSave.getSongTitle());
-                statement.setInt(4, itemToSave.getSongAlbum());
+                statement.setString(4, itemToSave.getSongAlbum());
                 statement.setString(5, itemToSave.getReleaseYear());
                 statement.setInt(6, itemToSave.getTrackNumber());
                 database.executeUpdate(statement);
@@ -88,7 +88,7 @@ public class SongService {
                 PreparedStatement statement = database.newStatement("UPDATE Songs SET FileURL = ?, SongTitle = ?, SongAlbum = ?, ReleaseYear = ?, TrackNumber = ? WHERE songID = ?");
                 statement.setString(1, itemToSave.getFileURL());
                 statement.setString(2, itemToSave.getSongTitle());
-                statement.setInt(3, itemToSave.getSongAlbum());
+                statement.setString(3, itemToSave.getSongAlbum());
                 statement.setString(4, itemToSave.getReleaseYear());
                 statement.setInt(5, itemToSave.getTrackNumber());
                 statement.setInt(6, itemToSave.getSongID());
