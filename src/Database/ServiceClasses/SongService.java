@@ -12,7 +12,7 @@ public class SongService {
 
     public static void selectAll(List<Song> targetList, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT songID, FileURL, SongTitle, SongAlbum, ReleaseYear, TrackNumber FROM Songs ORDER BY SongID");
+        PreparedStatement statement = database.newStatement("SELECT songID, FileURL, SongTitle, SongAlbum, Artist, ReleaseYear, TrackNumber FROM Songs ORDER BY SongID");
 
         try {
             if (statement != null) {
@@ -22,7 +22,7 @@ public class SongService {
                 if (results != null) {
                     while (results.next()) {
                         targetList.add(new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                                , results.getString("SongAlbum"), results.getString("ReleaseYear"), results.getInt("TrackNumber")));
+                                , results.getString("SongAlbum"),results.getString("Artist") ,results.getString("ReleaseYear"), results.getInt("TrackNumber")));
                     }
                 }
             }
@@ -35,7 +35,7 @@ public class SongService {
 
         Song result = null;
 
-        PreparedStatement statement = database.newStatement("SELECT SongID, FileURL, SongTitle, SongAlbum, ReleaseYear, TrackNumber FROM Songs WHERE SongID = ?");
+        PreparedStatement statement = database.newStatement("SELECT SongID, FileURL, SongTitle, SongAlbum, Artist, ReleaseYear, TrackNumber FROM Songs WHERE SongID = ?");
 
         try {
             if (statement != null) {
@@ -45,7 +45,7 @@ public class SongService {
 
                 if (results != null) {
                     result = new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                            , results.getString("SongAlbum"), results.getString("ReleaseYear"), results.getInt("TrackNumber"));
+                            , results.getString("SongAlbum"),results.getString("Artist") ,results.getString("ReleaseYear"), results.getInt("TrackNumber"));
                 }
             }
         } catch (SQLException resultsException) {

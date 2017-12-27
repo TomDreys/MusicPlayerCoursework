@@ -13,24 +13,33 @@ public class Song {
     SimpleStringProperty length;
     int songID;
 
-    public Song(int songID, String fileURL, String songTitle, String songAlbum, String releaseYear, int trackNumber) {
+    public Song(int songID, String fileURL, String songTitle, String songAlbum, String songArtist,String releaseYear, int trackNumber) {
         this.fileURL = fileURL;
         this.songTitle = new SimpleStringProperty(songTitle);
         this.songAlbum = new SimpleStringProperty(songAlbum);
+        this.songArtist = new SimpleStringProperty(songArtist);
         this.releaseYear = new SimpleStringProperty(releaseYear);
         this.trackNumber = new SimpleStringProperty(Integer.toString(trackNumber));
         this.songID = songID;
+        this.length = new SimpleStringProperty(Integer.toString(calculateLength()));
+    }
+
+    public int calculateLength()
+    {
+        return 0;
     }
 
     @Override
     public String toString() {
         return "Song{" +
-                "songID=" + songID +
-                ", fileURL='" + fileURL + '\'' +
-                ", songTitle='" + songTitle + '\'' +
-                ", songAlbum='" + songAlbum + '\'' +
-                ", releaseYear='" + releaseYear + '\'' +
+                "fileURL='" + fileURL + '\'' +
+                ", songTitle=" + songTitle +
+                ", songAlbum=" + songAlbum +
+                ", songArtist=" + songArtist +
+                ", releaseYear=" + releaseYear +
                 ", trackNumber=" + trackNumber +
+                ", length=" + length +
+                ", songID=" + songID +
                 '}';
     }
 
