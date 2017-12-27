@@ -1,4 +1,4 @@
-package Database.ModelClasses;
+package Database.ServiceClasses;
 
 public class PlaylistSongService {
 }

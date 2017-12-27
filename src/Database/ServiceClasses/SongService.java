@@ -1,6 +1,7 @@
-package Database.ModelClasses;
+package Database.ServiceClasses;
 
 import Database.DatabaseConnection;
+import Database.ObjectModels.Song;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

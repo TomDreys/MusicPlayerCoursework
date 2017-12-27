@@ -1,8 +1,7 @@
-import static GUI.GUI.*;
 import static GUI.GUIBuilder.createGUI;
 
 import Database.DatabaseConnection;
-import Database.ModelClasses.SongService;
+import Database.ServiceClasses.SongService;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

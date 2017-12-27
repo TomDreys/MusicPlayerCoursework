@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -77,16 +78,22 @@ public class GUIBuilder {
         TableView songs = new TableView();
         TableColumn trackNumber = new TableColumn("#");
         trackNumber.setPrefWidth(40);
+        trackNumber.setCellValueFactory(new PropertyValueFactory<>("trackNumber"));
         TableColumn song = new TableColumn("Song");
         song.setPrefWidth(170);
+        song.setCellValueFactory(new PropertyValueFactory<>("songTitle"));
         TableColumn artist = new TableColumn("Artist");
         artist.setPrefWidth(150);
+        artist.setCellValueFactory(new PropertyValueFactory<>("songArtist"));
         TableColumn album = new TableColumn("Album");
         album.setPrefWidth(150);
+        album.setCellValueFactory(new PropertyValueFactory<>("songAlbum"));
         TableColumn length = new TableColumn("Length");
         length.setPrefWidth(80);
+        length.setCellValueFactory(new PropertyValueFactory<>("length"));
         TableColumn addDate = new TableColumn("Add Date");
         addDate.setPrefWidth(110);
+        addDate.setCellValueFactory(new PropertyValueFactory<>("addDate"));
         songs.getColumns().addAll(trackNumber,song,artist,album,length,addDate);
         songs.setPrefHeight(540);
         gui.songsTable = songs;
@@ -215,8 +222,11 @@ public class GUIBuilder {
 
         TableView playlists = new TableView();
         TableColumn playlist = new TableColumn("Playlist");
+        playlist.setCellValueFactory(new PropertyValueFactory<>("songTitle"));
         TableColumn creator = new TableColumn("Creator");
+        creator.setCellValueFactory(new PropertyValueFactory<>("playlistCreator"));
         TableColumn runtime = new TableColumn("Runtime");
+        runtime.setCellValueFactory(new PropertyValueFactory<>("runTime"));
         playlists.getColumns().addAll(playlist,creator,runtime);
         gui.playlistsTable = playlists;
 

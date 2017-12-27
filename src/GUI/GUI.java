@@ -1,7 +1,7 @@
 package GUI;
 
-import Database.ModelClasses.Playlist;
-import Database.ModelClasses.Song;
+import Database.ObjectModels.Playlist;
+import Database.ObjectModels.Song;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 
@@ -70,11 +70,13 @@ public class GUI {
     public static void updateSongsTable(ObservableList<Song> songs)
     {
         songsTable.setItems(songs);
+        songsTable.refresh();
     }
 
     public static void updatePlaylistsTable(ObservableList<Playlist> playlists)
     {
         playlistsTable.setItems(playlists);
+        playlistsTable.refresh();
     }
 
 }
