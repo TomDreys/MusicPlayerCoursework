@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 public class GUIBuilder {
 
+    private static GUI gui = new GUI();
+
     public static GUI createGUI(Stage primaryStage) {
 
         GUI mainGUI = new GUI();
@@ -87,6 +89,7 @@ public class GUIBuilder {
         addDate.setPrefWidth(110);
         songs.getColumns().addAll(trackNumber,song,artist,album,length,addDate);
         songs.setPrefHeight(540);
+        gui.songsTable = songs;
 
         HBox visualisationTab = createVisualiationTab(gui);
 
@@ -104,14 +107,17 @@ public class GUIBuilder {
         LeftOptionBar.setPadding(new Insets(0,0,0,5));
 
         TextField searchInputField = new TextField();
+        gui.searchTextField = searchInputField;
 
         ComboBox searchTypeChoice = new ComboBox();
         searchTypeChoice.setPromptText("Search By...");
         searchTypeChoice.getItems().addAll("Song Title", "Album", "Artist","Release Year");
+        gui.searchType = searchTypeChoice;
 
         ComboBox searchAreaChoice = new ComboBox();
         searchAreaChoice.setPromptText("In...");
         searchAreaChoice.getItems().addAll("All Playlists", "Current Playlist");
+        gui.searchArea = searchAreaChoice;
 
         Button searchEnterButton = new Button();
         searchEnterButton.setText("Search");
@@ -143,39 +149,50 @@ public class GUIBuilder {
 
         Slider slider1 = new Slider();
         slider1.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider1 = slider1;
 
         Slider slider2 = new Slider();
         slider2.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider2 = slider2;
 
         Slider slider3 = new Slider();
         slider3.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider3 = slider3;
 
         Slider slider4 = new Slider();
         slider4.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider4 = slider4;
 
         Slider slider5 = new Slider();
         slider5.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider5 = slider5;
 
         Slider slider6 = new Slider();
         slider6.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider6 = slider6;
 
         Slider slider7 = new Slider();
         slider7.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider7 = slider7;
 
         Slider slider8 = new Slider();
         slider8.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider8 = slider8;
 
         Slider slider9 = new Slider();
         slider9.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider9 = slider9;
 
         Slider slider10 = new Slider();
         slider10.setOrientation(Orientation.VERTICAL);
+        gui.equalizerSlider10 = slider10;
 
         Button channelButton = new Button();
         channelButton.setText("Stereo");
         HBox channelButtonHBox = new HBox();
         channelButtonHBox.setAlignment(Pos.CENTER);
         channelButtonHBox.getChildren().add(channelButton);
+        gui.channelButton = channelButton;
 
         visualiationTab.getChildren().add(albumArtLabel);
         visualiationTab.getChildren().addAll(slider1,slider2,slider3,slider4,slider5,slider6,slider7,slider8,slider9, slider10);
@@ -201,6 +218,7 @@ public class GUIBuilder {
         TableColumn creator = new TableColumn("Creator");
         TableColumn runtime = new TableColumn("Runtime");
         playlists.getColumns().addAll(playlist,creator,runtime);
+        gui.playlistsTable = playlists;
 
         VBox controlPanel = createControlPanel(gui);
 
@@ -221,12 +239,14 @@ public class GUIBuilder {
 
         Button playModeButton = new Button();
         playModeButton.setText("Shuffle");
+        gui.playModeButton = playModeButton;
 
         ProgressBar songProgress = new ProgressBar();
         songProgress.setMinWidth(200);
 
         Slider volumeSlider = new Slider();
         volumeSlider.setMaxWidth(220);
+        gui.volumeSlider = volumeSlider;
 
         controlPanel.getChildren().add(playButtons);
         controlPanel.getChildren().add(playModeButton);
@@ -247,6 +267,7 @@ public class GUIBuilder {
 
         Button pauseButton = new Button();
         pauseButton.setText("Pause");
+        gui.playButton = pauseButton;
 
         Button skipButton = new Button();
         skipButton.setText("Skip");

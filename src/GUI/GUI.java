@@ -1,5 +1,6 @@
 package GUI;
 
+import Database.ModelClasses.Playlist;
 import Database.ModelClasses.Song;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -71,9 +72,9 @@ public class GUI {
         songsTable.setItems(songs);
     }
 
-    public static void updatePlaylistsTable()
+    public static void updatePlaylistsTable(ObservableList<Playlist> playlists)
     {
-
+        playlistsTable.setItems(playlists);
     }
 
 }
