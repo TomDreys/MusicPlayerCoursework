@@ -2,13 +2,13 @@ package Database.ObjectModels;
 
 public class PlaylistSong {
 
-    Song song;
-    Playlist playlist;
+    int songID;
+    int playlistID;
     String addDate;
 
-    public PlaylistSong(Song song, Playlist playlist, String addDate) {
-        this.song = song;
-        this.playlist = playlist;
+    public PlaylistSong(int songID, int playlistID, String addDate) {
+        this.songID = songID;
+        this.playlistID = playlistID;
         this.addDate = addDate;
     }
 }

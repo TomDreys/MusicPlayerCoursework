@@ -1,9 +1,15 @@
 import static GUI.GUIBuilder.createGUI;
 
 import Database.DatabaseConnection;
+import Database.ObjectModels.Song;
 import Database.ServiceClasses.SongService;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 public class Main extends Application{
 
@@ -17,7 +23,6 @@ public class Main extends Application{
         createGUI(primaryStage);
 
         DatabaseConnection DBconnection = new DatabaseConnection("src/MusicPlayer.db");
-        System.out.println(SongService.selectById(4,DBconnection));
 
     }
 }
