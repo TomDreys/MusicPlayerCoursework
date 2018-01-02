@@ -23,4 +23,13 @@ public class PlaylistSong {
     public String getAddDate() {
         return addDate;
     }
+
+    @Override
+    public String toString() {
+        return "PlaylistSong{" +
+                "songID=" + songID +
+                ", playlistID=" + playlistID +
+                ", addDate='" + addDate + '\'' +
+                '}';
+    }
 }

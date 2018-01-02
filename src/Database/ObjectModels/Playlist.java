@@ -13,6 +13,7 @@ public class Playlist {
     public Playlist(int playlistID, String playListName, String playlistCreator, int songCount) {
         this.playlistID = playlistID;
         this.runTime = calculateRuntime();
+        this.songCount = songCount;
         this.playListName = new SimpleStringProperty(playListName);
         this.playlistCreator = new SimpleStringProperty(playlistCreator);
     }
@@ -44,5 +45,16 @@ public class Playlist {
 
     public SimpleStringProperty playlistCreatorProperty() {
         return playlistCreator;
+    }
+
+    @Override
+    public String toString() {
+        return "Playlist{" +
+                "playlistID=" + playlistID +
+                ", runTime=" + runTime +
+                ", songCount=" + songCount +
+                ", playListName=" + playListName +
+                ", playlistCreator=" + playlistCreator +
+                '}';
     }
 }

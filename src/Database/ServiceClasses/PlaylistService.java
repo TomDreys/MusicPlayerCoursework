@@ -36,9 +36,9 @@ public class PlaylistService {
 
         Playlist result = null;
 
-        PreparedStatement statement = database.newStatement("SELECT PlaylistID ,PlaylistName,PlaylistCreator,COUNT(PlaylistSongs.SongID) FROM Playlists \n" +
+        PreparedStatement statement = database.newStatement("SELECT Playlists.PlaylistID ,Playlists.PlaylistName,Playlists.PlaylistCreator,COUNT(PlaylistSongs.SongID) FROM Playlists \n" +
                 "INNER JOIN PlaylistSongs on Playlists.PlaylistID = PlaylistSongs.PlaylistID \n" +
-                "where Playlists.PlaylistID = ? GROUP BY playlistSongs.PlaylistID ");
+                "WHERE Playlists.PlaylistID = ? GROUP BY playlistSongs.PlaylistID");
 
         try {
             if (statement != null) {

@@ -31,7 +31,7 @@ public class PlaylistSongService {
         }
     }
 
-    public static PlaylistSong selectById(int songD, int playlistID,DatabaseConnection database) {
+    public static PlaylistSong selectById(int songID, int playlistID,DatabaseConnection database) {
 
         PlaylistSong result = null;
 
@@ -40,8 +40,8 @@ public class PlaylistSongService {
         try {
             if (statement != null) {
 
-                statement.setInt(1, songD);
-                statement.setInt(2, playlistID);
+                statement.setInt(1, playlistID);
+                statement.setInt(2, songID);
                 ResultSet results = database.executeQuery(statement);
 
                 if (results != null) {
