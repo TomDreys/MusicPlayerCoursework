@@ -12,7 +12,9 @@ public class PlaylistService {
 
     public static void selectAll(List<Playlist> targetList, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT * FROM Playlists ORDER BY PlaylistID");
+        PreparedStatement statement = database.newStatement("SELECT PlaylistID ,PlaylistName,PlaylistCreator,COUNT(PlaylistSongs.SongID) FROM Playlists \n" +
+                "INNER JOIN PlaylistSongs on Playlists.PlaylistID = PlaylistSongs.PlaylistID \n" +
+                "GROUP BY playlistSongs.PlaylistID");
 
         try {
             if (statement != null) {
@@ -21,7 +23,7 @@ public class PlaylistService {
 
                 if (results != null) {
                     while (results.next()) {
-                        targetList.add(new Playlist(results.getInt("PlaylistID"), results.getString("PlaylistName"), results.getString("PlaylistCreator")));
+                        targetList.add(new Playlist(results.getInt("PlaylistID"), results.getString("PlaylistName"), results.getString("PlaylistCreator"), results.getInt("COUNT(PlaylistSongs.SongID)")));
                     }
                 }
             }

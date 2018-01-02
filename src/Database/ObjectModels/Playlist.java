@@ -6,12 +6,13 @@ public class Playlist {
 
     int playlistID;
     int runTime;
+    int songCount;
     SimpleStringProperty playListName;
     SimpleStringProperty playlistCreator;
 
-    public Playlist(int playlistID, String playListName, String playlistCreator) {
-        this.playlistID = playlistID;        this.runTime = calculateRuntime();
-
+    public Playlist(int playlistID, String playListName, String playlistCreator, int songCount) {
+        this.playlistID = playlistID;
+        this.runTime = calculateRuntime();
         this.playListName = new SimpleStringProperty(playListName);
         this.playlistCreator = new SimpleStringProperty(playlistCreator);
     }
