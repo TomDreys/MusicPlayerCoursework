@@ -10,10 +10,10 @@ public class Playlist {
     SimpleStringProperty playlistCreator;
 
     public Playlist(int playlistID, String playListName, String playlistCreator) {
-        this.playlistID = playlistID;
+        this.playlistID = playlistID;        this.runTime = calculateRuntime();
+
         this.playListName = new SimpleStringProperty(playListName);
         this.playlistCreator = new SimpleStringProperty(playlistCreator);
-        this.runTime = calculateRuntime();
     }
 
     public int calculateRuntime()
@@ -21,4 +21,27 @@ public class Playlist {
         return 0;
     }
 
+    public int getPlaylistID() {
+        return playlistID;
+    }
+
+    public int getRunTime() {
+        return runTime;
+    }
+
+    public String getPlayListName() {
+        return playListName.get();
+    }
+
+    public SimpleStringProperty playListNameProperty() {
+        return playListName;
+    }
+
+    public String getPlaylistCreator() {
+        return playlistCreator.get();
+    }
+
+    public SimpleStringProperty playlistCreatorProperty() {
+        return playlistCreator;
+    }
 }

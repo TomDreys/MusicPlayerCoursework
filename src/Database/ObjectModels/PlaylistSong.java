@@ -11,4 +11,16 @@ public class PlaylistSong {
         this.playlistID = playlistID;
         this.addDate = addDate;
     }
+
+    public int getSongID() {
+        return songID;
+    }
+
+    public int getPlaylistID() {
+        return playlistID;
+    }
+
+    public String getAddDate() {
+        return addDate;
+    }
 }
