@@ -55,6 +55,30 @@ public class SongService {
         return result;
     }
 
+    public static Song selectByFile(String filepath, DatabaseConnection database) {
+
+        Song result = null;
+
+        PreparedStatement statement = database.newStatement("SELECT SongID, FileURL, SongTitle, SongAlbum, Artist, ReleaseYear, TrackNumber FROM Songs WHERE FileURL = ?");
+
+        try {
+            if (statement != null) {
+
+                statement.setString(1, filepath);
+                ResultSet results = database.executeQuery(statement);
+
+                if (results != null) {
+                    result = new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
+                            , results.getString("SongAlbum"),results.getString("Artist") ,results.getString("ReleaseYear"), results.getInt("TrackNumber"));
+                }
+            }
+        } catch (SQLException resultsException) {
+            System.out.println("Database select by file error: " + resultsException.getMessage());
+        }
+
+        return result;
+    }
+
     public static void deleteById(int id, DatabaseConnection database) {
 
         PreparedStatement statement = database.newStatement("DELETE FROM Songs WHERE SongID = ?");
@@ -76,8 +100,7 @@ public class SongService {
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = database.newStatement("INSERT INTO Songs (songID, FileURL, SongTitle, SongAlbum, ReleaseYear, TrackNumber) VALUES (?, ?, ?, ?, ?, ?))");
-                statement.setInt(1, itemToSave.getSongID());
+                PreparedStatement statement = database.newStatement("INSERT INTO Songs  (FileURL, SongTitle, SongAlbum, ReleaseYear, TrackNumber) VALUES (?, ?, ?, ?, ?))");
                 statement.setString(2, itemToSave.getFileURL());
                 statement.setString(3, itemToSave.getSongTitle());
                 statement.setString(4, itemToSave.getSongAlbum());
