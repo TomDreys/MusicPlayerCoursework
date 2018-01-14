@@ -13,20 +13,20 @@ import java.util.List;
 
 public class OtherService {
 
-    public ArrayList<Song> loadPlaylistSongs(int playlistID, DatabaseConnection database)
+    public static ArrayList<Song> loadPlaylistSongs(int playlistID, DatabaseConnection database)
     {
         ArrayList<Song> playlistSongs = new ArrayList<>();
 
         PreparedStatement statement = database.newStatement("SELECT * FROM Songs \n" +
                 "INNER JOIN PlaylistSongs on PlaylistSongs.SongID = Songs.SongID \n" +
-                "INNER JOIN Playlists on PlaylistSongs.PlaylistID = Playlists.SongID \n" +
-                "WHERE PlaylistId = ?");
+                "INNER JOIN Playlists on PlaylistSongs.PlaylistID = Playlists.PlaylistID \n" +
+                "WHERE Playlists.PlaylistId = ?");
 
         try {
             if (statement != null) {
 
-                ResultSet results = database.executeQuery(statement);
                 statement.setInt(1, playlistID);
+                ResultSet results = database.executeQuery(statement);
                 database.executeQuery(statement);
                 if (results != null) {
                     while (results.next()) {

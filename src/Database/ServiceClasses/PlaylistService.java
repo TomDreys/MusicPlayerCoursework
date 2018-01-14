@@ -6,15 +6,18 @@ import Database.ObjectModels.Playlist;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaylistService {
 
-    public static void selectAll(List<Playlist> targetList, DatabaseConnection database) {
+    public static ArrayList<Playlist> selectAll(DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT PlaylistID ,PlaylistName,PlaylistCreator,COUNT(PlaylistSongs.SongID) FROM Playlists \n" +
+        PreparedStatement statement = database.newStatement("SELECT Playlists.PlaylistID ,Playlists.PlaylistName,Playlists.PlaylistCreator,COUNT(PlaylistSongs.SongID) FROM Playlists \n" +
                 "INNER JOIN PlaylistSongs on Playlists.PlaylistID = PlaylistSongs.PlaylistID \n" +
                 "GROUP BY playlistSongs.PlaylistID");
+
+        ArrayList<Playlist> targetList = new ArrayList<>();
 
         try {
             if (statement != null) {
@@ -30,6 +33,8 @@ public class PlaylistService {
         } catch (SQLException resultsException) {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
+
+        return targetList;
     }
 
     public static Playlist selectById(int id, DatabaseConnection database) {
@@ -79,8 +84,7 @@ public class PlaylistService {
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = database.newStatement("INSERT INTO Playlists (PlaylistID, PlaylistName, PlaylistCreator) VALUES (?, ?, ?))");
-                statement.setInt(1, itemToSave.getPlaylistID());
+                PreparedStatement statement = database.newStatement("INSERT INTO Playlists (PlaylistName, PlaylistCreator) VALUES (?, ?))");
                 statement.setString(2, itemToSave.getPlayListName());
                 statement.setString(3, itemToSave.getPlaylistCreator());
                 database.executeUpdate(statement);

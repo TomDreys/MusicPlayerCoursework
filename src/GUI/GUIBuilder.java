@@ -222,10 +222,13 @@ public class GUIBuilder {
 
         TableView playlists = new TableView();
         TableColumn playlist = new TableColumn("Playlist");
-        playlist.setCellValueFactory(new PropertyValueFactory<>("songTitle"));
+        playlist.setPrefWidth(70);
+        playlist.setCellValueFactory(new PropertyValueFactory<>("playlistID"));
         TableColumn creator = new TableColumn("Creator");
+        creator.setPrefWidth(174);
         creator.setCellValueFactory(new PropertyValueFactory<>("playlistCreator"));
         TableColumn runtime = new TableColumn("Runtime");
+        runtime.setPrefWidth(79);
         runtime.setCellValueFactory(new PropertyValueFactory<>("runTime"));
         playlists.getColumns().addAll(playlist,creator,runtime);
         gui.playlistsTable = playlists;
