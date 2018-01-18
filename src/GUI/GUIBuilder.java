@@ -34,7 +34,6 @@ public class GUIBuilder {
         return mainGUI;
     }
 
-
     private static Pane createPane(GUI gui)
     {
         Pane root = new Pane();
