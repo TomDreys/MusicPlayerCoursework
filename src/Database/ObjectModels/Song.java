@@ -1,5 +1,6 @@
 package Database.ObjectModels;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Song {
@@ -9,7 +10,7 @@ public class Song {
     SimpleStringProperty songAlbum;
     SimpleStringProperty songArtist;
     SimpleStringProperty releaseYear;
-    SimpleStringProperty trackNumber;
+    SimpleIntegerProperty trackNumber;
     SimpleStringProperty length;
     int songID;
 
@@ -19,7 +20,7 @@ public class Song {
         this.songAlbum = new SimpleStringProperty(songAlbum);
         this.songArtist = new SimpleStringProperty(songArtist);
         this.releaseYear = new SimpleStringProperty(releaseYear);
-        this.trackNumber = new SimpleStringProperty(Integer.toString(trackNumber));
+        this.trackNumber = new SimpleIntegerProperty(trackNumber);
         this.songID = songID;
         this.length = new SimpleStringProperty(Integer.toString(calculateLength()));
     }
@@ -47,12 +48,20 @@ public class Song {
         return fileURL;
     }
 
+    public void setFileURL(String fileURL) {
+        this.fileURL = fileURL;
+    }
+
     public String getSongTitle() {
         return songTitle.get();
     }
 
     public SimpleStringProperty songTitleProperty() {
         return songTitle;
+    }
+
+    public void setSongTitle(String songTitle) {
+        this.songTitle.set(songTitle);
     }
 
     public String getSongAlbum() {
@@ -63,6 +72,22 @@ public class Song {
         return songAlbum;
     }
 
+    public void setSongAlbum(String songAlbum) {
+        this.songAlbum.set(songAlbum);
+    }
+
+    public String getSongArtist() {
+        return songArtist.get();
+    }
+
+    public SimpleStringProperty songArtistProperty() {
+        return songArtist;
+    }
+
+    public void setSongArtist(String songArtist) {
+        this.songArtist.set(songArtist);
+    }
+
     public String getReleaseYear() {
         return releaseYear.get();
     }
@@ -71,15 +96,39 @@ public class Song {
         return releaseYear;
     }
 
-    public int getTrackNumber() {
-        return Integer.parseInt(trackNumber.get());
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear.set(releaseYear);
     }
 
-    public SimpleStringProperty trackNumberProperty() {
+    public int getTrackNumber() {
+        return trackNumber.get();
+    }
+
+    public SimpleIntegerProperty trackNumberProperty() {
         return trackNumber;
+    }
+
+    public void setTrackNumber(int trackNumber) {
+        this.trackNumber.set(trackNumber);
+    }
+
+    public String getLength() {
+        return length.get();
+    }
+
+    public SimpleStringProperty lengthProperty() {
+        return length;
+    }
+
+    public void setLength(String length) {
+        this.length.set(length);
     }
 
     public int getSongID() {
         return songID;
+    }
+
+    public void setSongID(int songID) {
+        this.songID = songID;
     }
 }

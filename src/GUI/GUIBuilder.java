@@ -1,5 +1,6 @@
 package GUI;
 
+import Database.ObjectModels.Song;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -75,27 +76,40 @@ public class GUIBuilder {
 
         HBox leftOptionBar = createLeftOptionBar(gui);
 
-        TableView songs = new TableView();
-        TableColumn trackNumber = new TableColumn("#");
+        TableView<Song> songs = new TableView<>();
+
+        TableColumn<Song, String> trackNumber = new TableColumn<>("#");
         trackNumber.setPrefWidth(40);
         trackNumber.setCellValueFactory(new PropertyValueFactory<>("trackNumber"));
-        TableColumn song = new TableColumn("Song");
+        songs.getColumns().add(trackNumber);
+
+        TableColumn<Song, String> song = new TableColumn<>("Song");
         song.setPrefWidth(170);
         song.setCellValueFactory(new PropertyValueFactory<>("songTitle"));
-        TableColumn artist = new TableColumn("Artist");
+        songs.getColumns().add(song);
+
+        TableColumn<Song, String> artist = new TableColumn<>("Artist");
         artist.setPrefWidth(150);
         artist.setCellValueFactory(new PropertyValueFactory<>("songArtist"));
-        TableColumn album = new TableColumn("Album");
+        songs.getColumns().add(artist);
+
+        TableColumn<Song, String> album = new TableColumn<>("Album");
         album.setPrefWidth(150);
         album.setCellValueFactory(new PropertyValueFactory<>("songAlbum"));
-        TableColumn length = new TableColumn("Length");
+        songs.getColumns().add(album);
+
+        TableColumn<Song, String> length = new TableColumn<>("Length");
         length.setPrefWidth(80);
         length.setCellValueFactory(new PropertyValueFactory<>("length"));
-        TableColumn addDate = new TableColumn("Add Date");
+        songs.getColumns().add(length);
+
+        TableColumn<Song, String> addDate = new TableColumn<>("Add Date");
         addDate.setPrefWidth(110);
         addDate.setCellValueFactory(new PropertyValueFactory<>("addDate"));
-        songs.getColumns().addAll(trackNumber,song,artist,album,length,addDate);
+        songs.getColumns().add(addDate);
+
         songs.setPrefHeight(540);
+
         gui.songsTable = songs;
 
         HBox visualisationTab = createVisualiationTab(gui);

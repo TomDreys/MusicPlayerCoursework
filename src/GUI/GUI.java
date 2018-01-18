@@ -9,8 +9,8 @@ import javafx.scene.control.*;
 public class GUI {
 
     //attributes that require updating during use
-    public static TableView songsTable;
-    public static TableView playlistsTable;
+    public static TableView<Song> songsTable;
+    public static TableView<Playlist> playlistsTable;
     public static Button channelButton;
     public static Button playButton;
     public static Button playModeButton;

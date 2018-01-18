@@ -21,8 +21,13 @@ public class SongService {
 
                 if (results != null) {
                     while (results.next()) {
-                        targetList.add(new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                                , results.getString("SongAlbum"),results.getString("Artist") ,results.getString("ReleaseYear"), results.getInt("TrackNumber")));
+                        targetList.add(new Song(results.getInt("SongID"),
+                                results.getString("FileURL"),
+                                results.getString("SongTitle"),
+                                results.getString("SongAlbum"),
+                                results.getString("Artist"),
+                                results.getString("ReleaseYear"),
+                                results.getInt("TrackNumber")));
                     }
                 }
             }
@@ -44,8 +49,13 @@ public class SongService {
                 ResultSet results = database.executeQuery(statement);
 
                 if (results != null) {
-                    result = new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                            , results.getString("SongAlbum"),results.getString("Artist") ,results.getString("ReleaseYear"), results.getInt("TrackNumber"));
+                    result = new Song(  results.getInt("SongID"),
+                                        results.getString("FileURL"),
+                                        results.getString("SongTitle"),
+                                        results.getString("SongAlbum"),
+                                        results.getString("Artist"),
+                                        results.getString("ReleaseYear"),
+                                        results.getInt("TrackNumber"));
                 }
             }
         } catch (SQLException resultsException) {

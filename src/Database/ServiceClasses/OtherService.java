@@ -17,9 +17,16 @@ public class OtherService {
     {
         ArrayList<Song> playlistSongs = new ArrayList<>();
 
-        PreparedStatement statement = database.newStatement("SELECT * FROM Songs \n" +
-                "INNER JOIN PlaylistSongs on PlaylistSongs.SongID = Songs.SongID \n" +
-                "INNER JOIN Playlists on PlaylistSongs.PlaylistID = Playlists.PlaylistID \n" +
+        PreparedStatement statement = database.newStatement("SELECT Songs.SongID as 'a', \n" +
+                "Songs.FileURL as 'b',\n" +
+                "Songs.SongTitle as 'c', \n" +
+                "Songs.SongAlbum as 'd', \n" +
+                "Songs.Artist as 'e',\n" +
+                "Songs.ReleaseYear as 'f',\n" +
+                "Songs.TrackNumber as 'g'\n" +
+                "FROM Songs\n" +
+                "INNER JOIN PlaylistSongs on PlaylistSongs.SongID = Songs.SongID\n" +
+                "INNER JOIN Playlists on PlaylistSongs.PlaylistID = Playlists.PlaylistID\n" +
                 "WHERE Playlists.PlaylistId = ?");
 
         try {
@@ -30,8 +37,17 @@ public class OtherService {
                 database.executeQuery(statement);
                 if (results != null) {
                     while (results.next()) {
-                        playlistSongs.add(new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                                , results.getString("SongAlbum"),results.getString("Artist") ,results.getString("ReleaseYear"), results.getInt("TrackNumber")));
+                        Song s = new Song( results.getInt("a"),
+                                results.getString("b"),
+                                results.getString("c"),
+                                results.getString("d"),
+                                results.getString("e"),
+                                results.getString("f"),
+                                results.getInt("g"));
+                        System.out.println("----> " + s);
+                        playlistSongs.add(s);
+
+
                     }
                 }
             }
