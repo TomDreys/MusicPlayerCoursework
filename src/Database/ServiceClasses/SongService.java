@@ -27,7 +27,7 @@ public class SongService {
                                 results.getString("SongAlbum"),
                                 results.getString("Artist"),
                                 results.getString("ReleaseYear"),
-                                results.getInt("TrackNumber")));
+                                results.getInt("TrackNumber"), "N/A"));
                     }
                 }
             }
@@ -55,7 +55,8 @@ public class SongService {
                                         results.getString("SongAlbum"),
                                         results.getString("Artist"),
                                         results.getString("ReleaseYear"),
-                                        results.getInt("TrackNumber"));
+                                        results.getInt("TrackNumber"),
+                                                          "N/A");
                 }
             }
         } catch (SQLException resultsException) {
@@ -78,8 +79,13 @@ public class SongService {
                 ResultSet results = database.executeQuery(statement);
 
                 if (results != null) {
-                    result = new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                            , results.getString("SongAlbum"),results.getString("Artist") ,results.getString("ReleaseYear"), results.getInt("TrackNumber"));
+                    result = new Song(results.getInt("SongID"),
+                            results.getString("FileURL"),
+                            results.getString("SongTitle"),
+                            results.getString("SongAlbum"),
+                            results.getString("Artist") ,
+                            results.getString("ReleaseYear"),
+                            results.getInt("TrackNumber"), "N/A");
                 }
             }
         } catch (SQLException resultsException) {

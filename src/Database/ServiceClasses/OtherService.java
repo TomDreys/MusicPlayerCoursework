@@ -23,7 +23,8 @@ public class OtherService {
                 "Songs.SongAlbum as 'd', \n" +
                 "Songs.Artist as 'e',\n" +
                 "Songs.ReleaseYear as 'f',\n" +
-                "Songs.TrackNumber as 'g'\n" +
+                "Songs.TrackNumber as 'g',\n" +
+                "PlaylistSongs.AddDate as 'h'\n" +
                 "FROM Songs\n" +
                 "INNER JOIN PlaylistSongs on PlaylistSongs.SongID = Songs.SongID\n" +
                 "INNER JOIN Playlists on PlaylistSongs.PlaylistID = Playlists.PlaylistID\n" +
@@ -43,7 +44,8 @@ public class OtherService {
                                 results.getString("d"),
                                 results.getString("e"),
                                 results.getString("f"),
-                                results.getInt("g"));
+                                results.getInt("g"),
+                                results.getString("h"));
                         System.out.println("----> " + s);
                         playlistSongs.add(s);
 
@@ -51,7 +53,6 @@ public class OtherService {
                     }
                 }
             }
-
 
         } catch (SQLException resultsException) {
             System.out.println("loadPlaylistSongs error: " + resultsException.getMessage());
@@ -75,8 +76,13 @@ public class OtherService {
 
                 if (results != null) {
                     while (results.next()) {
-                        songs.add(new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                                , results.getString("SongAlbum"),results.getString("Artist") ,results.getString("ReleaseYear"), results.getInt("TrackNumber")));
+                        songs.add(new Song(results.getInt("SongID"),
+                                results.getString("FileURL"),
+                                results.getString("SongTitle"),
+                                results.getString("SongAlbum"),
+                                results.getString("Artist") ,
+                                results.getString("ReleaseYear"),
+                                results.getInt("TrackNumber"), "N/A"));
                     }
                 }
             }
@@ -91,7 +97,13 @@ public class OtherService {
     {
 
         ArrayList<Song> songs = new ArrayList<>();
-        PreparedStatement statement = database.newStatement("SELECT * FROM Songs \n" +
+        PreparedStatement statement = database.newStatement("SELECT Songs.FileURL as 'b',\n" +
+                "Songs.SongTitle as 'c', \n" +
+                "Songs.SongAlbum as 'd', \n" +
+                "Songs.Artist as 'e',\n" +
+                "Songs.ReleaseYear as 'f',\n" +
+                "Songs.TrackNumber as 'g',\n" +
+                "PlaylistSongs.AddDate as 'h', FROM Songs \n" +
                 "INNER JOIN PlaylistSongs on PlaylistSongs.SongID = Songs.SongID \n" +
                 "INNER JOIN Playlists on PlaylistSongs.PlaylistID = Playlists.PlaylistID \n" +
                 "WHERE PlaylistID = \"?\" AND ? = \"?\"");
@@ -107,8 +119,14 @@ public class OtherService {
 
                 if (results != null) {
                     while (results.next()) {
-                        songs.add(new Song(results.getInt("SongID"), results.getString("FileURL"), results.getString("SongTitle")
-                                , results.getString("SongAlbum"),results.getString("Artist") ,results.getString("ReleaseYear"), results.getInt("TrackNumber")));
+                        songs.add(new Song(results.getInt("SongID"),
+                                results.getString("FileURL"),
+                                results.getString("SongTitle"),
+                                results.getString("SongAlbum"),
+                                results.getString("Artist") ,
+                                results.getString("ReleaseYear"),
+                                results.getInt("TrackNumber"),
+                                results.getString("h")));
                     }
                 }
             }

@@ -12,9 +12,10 @@ public class Song {
     SimpleStringProperty releaseYear;
     SimpleIntegerProperty trackNumber;
     SimpleStringProperty length;
+    SimpleStringProperty addDate;
     int songID;
 
-    public Song(int songID, String fileURL, String songTitle, String songAlbum, String songArtist,String releaseYear, int trackNumber) {
+    public Song(int songID, String fileURL, String songTitle, String songAlbum, String songArtist,String releaseYear, int trackNumber, String addDate) {
         this.fileURL = fileURL;
         this.songTitle = new SimpleStringProperty(songTitle);
         this.songAlbum = new SimpleStringProperty(songAlbum);
@@ -23,6 +24,7 @@ public class Song {
         this.trackNumber = new SimpleIntegerProperty(trackNumber);
         this.songID = songID;
         this.length = new SimpleStringProperty(Integer.toString(calculateLength()));
+        this.addDate = new SimpleStringProperty(addDate);
     }
 
     public int calculateLength()
@@ -130,5 +132,17 @@ public class Song {
 
     public void setSongID(int songID) {
         this.songID = songID;
+    }
+
+    public String getAddDate() {
+        return addDate.get();
+    }
+
+    public SimpleStringProperty addDateProperty() {
+        return addDate;
+    }
+
+    public void setAddDate(String addDate) {
+        this.addDate.set(addDate);
     }
 }
