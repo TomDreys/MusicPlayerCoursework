@@ -1,8 +1,11 @@
 import static GUI.GUIBuilder.createGUI;
+
+import AudioController.AudioController;
 import Database.DatabaseConnection;
 import Database.ObjectModels.PlaylistSong;
 import Database.ServiceClasses.PlaylistSongService;
 import GUI.GUI;
+import MainController.AudioFunctionality;
 import MainController.DatabaseFunctionality;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -24,5 +27,10 @@ public class Main extends Application{
 
         DatabaseFunctionality.loadFromPlaylist(3, DBconnection, gui);
         DatabaseFunctionality.loadPlaylists(DBconnection, gui);
+
+        AudioController audioController = new AudioController();
+        AudioFunctionality audioFunctionality = new AudioFunctionality(audioController,gui);
+        audioController.playSong("res/A Faint Illusion");
+
     }
 }

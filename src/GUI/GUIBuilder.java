@@ -1,6 +1,9 @@
 package GUI;
 
 import Database.ObjectModels.Song;
+import MainController.AudioFunctionality;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -298,6 +301,12 @@ public class GUIBuilder {
 
         Button pauseButton = new Button();
         pauseButton.setText("Pause");
+        pauseButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AudioFunctionality.togglePause();
+            }
+        });
         gui.playButton = pauseButton;
 
         Button skipButton = new Button();
