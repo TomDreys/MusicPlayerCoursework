@@ -104,6 +104,7 @@ public class GUIBuilder {
 
         TableColumn<Song, String> addDate = new TableColumn<>("Add Date");
         addDate.setPrefWidth(110);
+        addDate.setSortType(TableColumn.SortType.ASCENDING);
         addDate.setCellValueFactory(new PropertyValueFactory<>("addDate"));
         songs.getColumns().add(addDate);
 

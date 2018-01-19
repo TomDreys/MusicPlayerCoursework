@@ -22,7 +22,7 @@ public class Main extends Application{
         PlaylistSong playlist = PlaylistSongService.selectById(7,3, DBconnection);
         System.out.println(playlist.toString());
 
-        DatabaseFunctionality.loadFromPlaylist(2, DBconnection, gui);
+        DatabaseFunctionality.loadFromPlaylist(3, DBconnection, gui);
         DatabaseFunctionality.loadPlaylists(DBconnection, gui);
     }
 }
