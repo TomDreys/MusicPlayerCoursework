@@ -33,10 +33,12 @@ public class AudioController {
             if (isPlaying == false)
             {
                 mediaPlayer.play();
+                isPlaying = true;
             }
             else
             {
                 mediaPlayer.pause();
+                isPlaying = false;
             }
         }
 
