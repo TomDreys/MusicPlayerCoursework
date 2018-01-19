@@ -2,6 +2,8 @@ package GUI;
 
 import Database.ObjectModels.Song;
 import MainController.AudioFunctionality;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -273,14 +275,29 @@ public class GUIBuilder {
 
         Button playModeButton = new Button();
         playModeButton.setText("Shuffle");
+        playModeButton.setPrefWidth(60);
         gui.playModeButton = playModeButton;
+        playModeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AudioFunctionality.togglePlayMode();
+            }
+        });
 
         ProgressBar songProgress = new ProgressBar();
         songProgress.setMinWidth(200);
 
         Slider volumeSlider = new Slider();
         volumeSlider.setMaxWidth(220);
+        volumeSlider.setMax(1);
+        volumeSlider.setMin(0);
         gui.volumeSlider = volumeSlider;
+        volumeSlider.valueProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue arg0, Object arg1, Object arg2) {
+                AudioFunctionality.setVolume(volumeSlider.getValue());
+            }
+        });
 
         controlPanel.getChildren().add(playButtons);
         controlPanel.getChildren().add(playModeButton);
@@ -298,9 +315,17 @@ public class GUIBuilder {
 
         Button rewindButton = new Button();
         rewindButton.setText("Rewind");
+        rewindButton.setPrefWidth(60);
+        rewindButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AudioFunctionality.rewindSong();
+            }
+        });
 
         Button pauseButton = new Button();
         pauseButton.setText("Pause");
+        pauseButton.setPrefWidth(60);
         pauseButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -311,6 +336,13 @@ public class GUIBuilder {
 
         Button skipButton = new Button();
         skipButton.setText("Skip");
+        skipButton.setPrefWidth(60);
+        skipButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AudioFunctionality.skipSong();
+            }
+        });
 
         playButtons.getChildren().add(rewindButton);
         playButtons.getChildren().add(pauseButton);

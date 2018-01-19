@@ -45,7 +45,7 @@ public class AudioController {
         return isPlaying;
     }
 
-    public static void togglePlayMode()
+    public static boolean togglePlayMode()
     {
         if (playMode == false)
         {
@@ -55,6 +55,8 @@ public class AudioController {
         {
             playMode = false;
         }
+
+        return playMode;
     }
 
     public static void setVolume(double volume)
