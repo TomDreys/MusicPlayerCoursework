@@ -27,7 +27,6 @@ public class Main extends Application{
 
         DatabaseFunctionality databaseFunctionality = new DatabaseFunctionality(DBconnection);
 
-        DatabaseFunctionality.loadFromPlaylist(3, gui);
         DatabaseFunctionality.loadPlaylists(DBconnection, gui);
 
         AudioController audioController = new AudioController();

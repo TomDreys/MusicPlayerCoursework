@@ -1,5 +1,6 @@
 package GUI;
 
+import AudioController.AudioController;
 import Database.ObjectModels.Playlist;
 import Database.ObjectModels.Song;
 import MainController.AudioFunctionality;
@@ -20,6 +21,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class GUIBuilder {
 
@@ -259,7 +262,8 @@ public class GUIBuilder {
                 Playlist seletedPlaylist = null;
                 if ((seletedPlaylist = playlists.getSelectionModel().getSelectedItem()) != null && event.getClickCount() == 2)
                 {
-                    DatabaseFunctionality.loadFromPlaylist(seletedPlaylist.getPlaylistID(), gui);
+                    ArrayList<Song> songs = DatabaseFunctionality.loadFromPlaylist(seletedPlaylist.getPlaylistID(), gui);
+                    AudioFunctionality.setPlaylist(songs);
                 }
             }
         });

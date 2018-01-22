@@ -4,11 +4,11 @@ import Database.ObjectModels.Song;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
-import java.util.Queue;
+import java.util.ArrayList;
 
 public class AudioController {
 
-    static Queue<Song> currentSongs;
+    static ArrayList<Song> currentPlaylistSongs;
     static int currentSongPointer = 0;
     static int previousSongPointer = 0;
     static MediaPlayer mediaPlayer = null;
@@ -23,7 +23,14 @@ public class AudioController {
 
     public static void skipSong()
     {
+        if (playMode == false)
+        {
 
+        }
+        else
+        {
+
+        }
     }
 
     public static boolean togglePauseSong()
@@ -72,6 +79,10 @@ public class AudioController {
     public static void setProgress()
     {
 
+    }
+
+    public static void setCurrentPlaylistSongs(ArrayList<Song> currentPlaylistSongs) {
+        AudioController.currentPlaylistSongs = currentPlaylistSongs;
     }
 
     public static void playSong(String fileURL)

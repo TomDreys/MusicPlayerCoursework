@@ -1,8 +1,9 @@
 package MainController;
 
 import AudioController.AudioController;
+import Database.ObjectModels.Song;
 import GUI.GUI;
-import sun.reflect.generics.tree.VoidDescriptor;
+import java.util.ArrayList;
 
 public class AudioFunctionality {
 
@@ -56,4 +57,6 @@ public class AudioFunctionality {
     {
         audioController.setVolume(volume);
     }
+
+    public static void setPlaylist(ArrayList<Song> songs){audioController.setCurrentPlaylistSongs(songs);}
 }

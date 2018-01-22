@@ -31,11 +31,12 @@ public class DatabaseFunctionality {
 
     }
 
-    public static void loadFromPlaylist(int playlistID, GUI gui)
+    public static ArrayList<Song> loadFromPlaylist(int playlistID, GUI gui)
     {
         ArrayList<Song> songs = OtherService.loadPlaylistSongs(playlistID,databaseConnection);
         ObservableList<Song> Olist = FXCollections.observableArrayList(songs);
         gui.updateSongsTable(Olist);
+        return songs;
     }
 
     public static void loadPlaylists(DatabaseConnection databaseConnection, GUI gui)
