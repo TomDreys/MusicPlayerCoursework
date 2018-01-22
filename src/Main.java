@@ -30,7 +30,6 @@ public class Main extends Application{
 
         AudioController audioController = new AudioController();
         AudioFunctionality audioFunctionality = new AudioFunctionality(audioController,gui);
-        audioController.playSong("res/Every Breath You Take");
 
     }
 }

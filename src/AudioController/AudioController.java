@@ -80,6 +80,10 @@ public class AudioController {
         if (songFile.isFile())
         {
             Media songMedia = new Media(songFile.toURI().toString());
+            if (mediaPlayer != null)
+            {
+                mediaPlayer.stop();
+            }
             mediaPlayer = new MediaPlayer(songMedia);
             mediaPlayer.play();
             isPlaying = true;

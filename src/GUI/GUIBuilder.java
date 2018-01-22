@@ -1,7 +1,9 @@
 package GUI;
 
+import Database.ObjectModels.Playlist;
 import Database.ObjectModels.Song;
 import MainController.AudioFunctionality;
+import MainController.DatabaseFunctionality;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -81,6 +84,16 @@ public class GUIBuilder {
         HBox leftOptionBar = createLeftOptionBar(gui);
 
         TableView<Song> songs = new TableView<>();
+        songs.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Song seletedSong = null;
+                if ((seletedSong = songs.getSelectionModel().getSelectedItem()) != null && event.getClickCount() == 2)
+                {
+                    AudioFunctionality.playSong(seletedSong.getFileURL());
+                }
+            }
+        });
 
         TableColumn<Song, String> trackNumber = new TableColumn<>("#");
         trackNumber.setPrefWidth(40);
@@ -239,7 +252,17 @@ public class GUIBuilder {
         playlistButtonVbox.setAlignment(Pos.TOP_RIGHT);
         playlistButtonVbox.getChildren().add(addPlaylistButton);
 
-        TableView playlists = new TableView();
+        TableView<Playlist> playlists = new TableView();
+        playlists.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Playlist seletedPlaylist = null;
+                if ((seletedPlaylist = playlists.getSelectionModel().getSelectedItem()) != null && event.getClickCount() == 2)
+                {
+                        
+                }
+            }
+        });
 
         TableColumn playlist = new TableColumn("Playlist");
         playlist.setPrefWidth(70);

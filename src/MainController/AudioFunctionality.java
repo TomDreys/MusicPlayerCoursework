@@ -2,6 +2,7 @@ package MainController;
 
 import AudioController.AudioController;
 import GUI.GUI;
+import sun.reflect.generics.tree.VoidDescriptor;
 
 public class AudioFunctionality {
 
@@ -31,13 +32,15 @@ public class AudioFunctionality {
         boolean isPlaying = audioController.togglePlayMode();
         if (isPlaying == false)
         {
-            gui.playButton.setText("Shuffle");
+            gui.playModeButton.setText("Shuffle");
         }
         else
         {
-            gui.playButton.setText("Loop");
+            gui.playModeButton.setText("Loop");
         }
     }
+
+    public static void playSong(String filename) { audioController.playSong(filename);}
 
     public static void rewindSong()
     {
