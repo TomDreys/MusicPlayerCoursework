@@ -14,6 +14,12 @@ import java.util.ArrayList;
 
 public class DatabaseFunctionality {
 
+    private static DatabaseConnection databaseConnection;
+
+    public DatabaseFunctionality(DatabaseConnection databaseConnection) {
+        this.databaseConnection = databaseConnection;
+    }
+
     public void createNewPlaylist(String name, String creator, DatabaseConnection databaseConnection)
     {
         Playlist playlist = new Playlist(0, name,creator,0);
@@ -25,7 +31,7 @@ public class DatabaseFunctionality {
 
     }
 
-    public static void loadFromPlaylist(int playlistID, DatabaseConnection databaseConnection,GUI gui)
+    public static void loadFromPlaylist(int playlistID, GUI gui)
     {
         ArrayList<Song> songs = OtherService.loadPlaylistSongs(playlistID,databaseConnection);
         ObservableList<Song> Olist = FXCollections.observableArrayList(songs);

@@ -25,7 +25,9 @@ public class Main extends Application{
         PlaylistSong playlist = PlaylistSongService.selectById(7,3, DBconnection);
         System.out.println(playlist.toString());
 
-        DatabaseFunctionality.loadFromPlaylist(3, DBconnection, gui);
+        DatabaseFunctionality databaseFunctionality = new DatabaseFunctionality(DBconnection);
+
+        DatabaseFunctionality.loadFromPlaylist(3, gui);
         DatabaseFunctionality.loadPlaylists(DBconnection, gui);
 
         AudioController audioController = new AudioController();

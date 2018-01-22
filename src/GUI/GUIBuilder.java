@@ -259,7 +259,7 @@ public class GUIBuilder {
                 Playlist seletedPlaylist = null;
                 if ((seletedPlaylist = playlists.getSelectionModel().getSelectedItem()) != null && event.getClickCount() == 2)
                 {
-                        
+                    DatabaseFunctionality.loadFromPlaylist(seletedPlaylist.getPlaylistID(), gui);
                 }
             }
         });
