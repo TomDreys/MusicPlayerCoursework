@@ -25,11 +25,11 @@ public class AudioController {
     {
         if (playMode == false)
         {
-
+            //shuffle
         }
         else
         {
-
+            //loop
         }
     }
 
