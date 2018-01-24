@@ -1,6 +1,7 @@
 package AudioController;
 
 import Database.ObjectModels.Song;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
@@ -16,6 +17,7 @@ public class AudioController {
     static boolean playMode;
     static boolean channelMode;
     static boolean isPlaying;
+    static double volume;
 
     public static void rewind()
     {
@@ -78,9 +80,10 @@ public class AudioController {
         return playMode;
     }
 
-    public static void setVolume(double volume)
+    public void setVolume(double volume)
     {
         mediaPlayer.setVolume(volume);
+        this.volume = volume;
     }
 
     public static void setEqualisation()
@@ -108,6 +111,7 @@ public class AudioController {
                 mediaPlayer.stop();
             }
             mediaPlayer = new MediaPlayer(songMedia);
+            mediaPlayer.setVolume(volume);
             mediaPlayer.play();
             isPlaying = true;
         }
