@@ -26,6 +26,7 @@ public class DatabaseFunctionality {
     public static ArrayList<Song> loadFromPlaylist(int playlistID)
     {
         ArrayList<Song> songs = OtherService.loadPlaylistSongs(playlistID);
+        audioController.setCurrentPlaylistSongs(songs);
         ObservableList<Song> Olist = FXCollections.observableArrayList(songs);
         mainGui.updateSongsTable(Olist);
         return songs;

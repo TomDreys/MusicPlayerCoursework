@@ -5,6 +5,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class AudioController {
 
@@ -18,18 +19,29 @@ public class AudioController {
 
     public static void rewind()
     {
-
+        if (mediaPlayer.getCurrentTime().toSeconds()< 3)
+        {
+            playSong(currentPlaylistSongs.get(previousSongPointer).getFileURL());
+        }
+        else
+        {
+            playSong(currentPlaylistSongs.get(currentSongPointer).getFileURL());
+        }
     }
 
     public static void skipSong()
     {
         if (playMode == false)
         {
-            //shuffle
+            previousSongPointer = currentSongPointer;
+            getRandomPointer(0,currentPlaylistSongs.size() -1);
+            playSong(currentPlaylistSongs.get(currentSongPointer).getFileURL());
         }
         else
         {
-            //loop
+            previousSongPointer = currentSongPointer;
+            getNextPointer();
+            playSong(currentPlaylistSongs.get(currentSongPointer).getFileURL());
         }
     }
 
@@ -104,4 +116,25 @@ public class AudioController {
             System.out.println("File error.");
         }
     }
+
+    private static void getRandomPointer(int min, int max)
+    {
+        Random rand = new Random();
+        int pointer;
+        do {
+            pointer = rand.nextInt(max) + min;
+        }while (pointer ==  currentSongPointer);
+
+        currentSongPointer = pointer;
+    }
+
+    private static void getNextPointer()
+    {
+        currentSongPointer += 1;
+        if (currentSongPointer == currentPlaylistSongs.size())
+        {
+            currentSongPointer = 0;
+        }
+    }
 }
+
