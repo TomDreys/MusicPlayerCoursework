@@ -36,7 +36,7 @@ public class AudioController {
         if (playMode == false)
         {
             previousSongPointer = currentSongPointer;
-            getRandomPointer(0,currentPlaylistSongs.size() -1);
+            getRandomPointer(0,currentPlaylistSongs.size());
             playSong(currentPlaylistSongs.get(currentSongPointer).getFileURL());
         }
         else
@@ -112,6 +112,12 @@ public class AudioController {
             }
             mediaPlayer = new MediaPlayer(songMedia);
             mediaPlayer.setVolume(volume);
+            mediaPlayer.setOnEndOfMedia(new Runnable() {
+                @Override
+                public void run() {
+                    skipSong();
+                }
+            });
             mediaPlayer.play();
             isPlaying = true;
         }
@@ -127,7 +133,7 @@ public class AudioController {
         int pointer;
         do {
             pointer = rand.nextInt(max) + min;
-        }while (pointer ==  currentSongPointer);
+        }while (pointer == currentSongPointer);
 
         currentSongPointer = pointer;
     }
