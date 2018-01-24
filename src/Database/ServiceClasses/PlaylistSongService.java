@@ -1,7 +1,5 @@
 package Database.ServiceClasses;
 
-import Database.DatabaseConnection;
-import Database.ObjectModels.Playlist;
 import Database.ObjectModels.PlaylistSong;
 import static Main.Main.*;
 import java.sql.PreparedStatement;

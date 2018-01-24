@@ -1,13 +1,11 @@
 package Database.ServiceClasses;
 
-import Database.DatabaseConnection;
 import Database.ObjectModels.Playlist;
 import static Main.Main.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlaylistService {
 

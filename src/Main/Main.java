@@ -3,8 +3,6 @@ package Main;
 import static GUI.GUIBuilder.createGUI;
 import AudioController.AudioController;
 import Database.DatabaseConnection;
-import Database.ObjectModels.PlaylistSong;
-import Database.ServiceClasses.PlaylistSongService;
 import GUI.GUI;
 import MainController.DatabaseFunctionality;
 import javafx.application.Application;
@@ -27,10 +25,6 @@ public class Main extends Application{
         databaseConnection = new DatabaseConnection("src/MusicPlayer.db");
         audioController = new AudioController();
 
-        PlaylistSong playlist = PlaylistSongService.selectById(7,3);
-        System.out.println(playlist.toString());
-
         DatabaseFunctionality.loadPlaylists();
-
     }
 }

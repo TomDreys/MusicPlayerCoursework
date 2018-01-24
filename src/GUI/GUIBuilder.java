@@ -1,6 +1,5 @@
 package GUI;
 
-import AudioController.AudioController;
 import Database.ObjectModels.Playlist;
 import Database.ObjectModels.Song;
 import MainController.AudioFunctionality;
