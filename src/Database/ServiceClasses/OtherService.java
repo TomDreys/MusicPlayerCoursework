@@ -1,23 +1,20 @@
 package Database.ServiceClasses;
 
 import Database.DatabaseConnection;
-import Database.ObjectModels.Playlist;
 import Database.ObjectModels.Song;
-
-import javax.xml.crypto.Data;
+import static Main.Main.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OtherService {
 
-    public static ArrayList<Song> loadPlaylistSongs(int playlistID, DatabaseConnection database)
+    public static ArrayList<Song> loadPlaylistSongs(int playlistID)
     {
         ArrayList<Song> playlistSongs = new ArrayList<>();
 
-        PreparedStatement statement = database.newStatement("SELECT Songs.SongID as 'a', \n" +
+        PreparedStatement statement = databaseConnection.newStatement("SELECT Songs.SongID as 'a', \n" +
                 "Songs.FileURL as 'b',\n" +
                 "Songs.SongTitle as 'c', \n" +
                 "Songs.SongAlbum as 'd', \n" +
@@ -34,8 +31,8 @@ public class OtherService {
             if (statement != null) {
 
                 statement.setInt(1, playlistID);
-                ResultSet results = database.executeQuery(statement);
-                database.executeQuery(statement);
+                ResultSet results = databaseConnection.executeQuery(statement);
+                databaseConnection.executeQuery(statement);
                 if (results != null) {
                     while (results.next()) {
                         Song s = new Song( results.getInt("a"),
@@ -61,9 +58,9 @@ public class OtherService {
         return playlistSongs;
     }
 
-    public static ArrayList<Song> searchAllSongs(String criteria, String criteriaType, DatabaseConnection database)
+    public static ArrayList<Song> searchAllSongs(String criteria, String criteriaType)
     {
-        PreparedStatement statement = database.newStatement("SELECT songID, FileURL, SongTitle, SongAlbum, Artist, ReleaseYear, TrackNumber FROM Songs WHERE ? = ?");
+        PreparedStatement statement = databaseConnection.newStatement("SELECT songID, FileURL, SongTitle, SongAlbum, Artist, ReleaseYear, TrackNumber FROM Songs WHERE ? = ?");
         ArrayList<Song> songs= new ArrayList<>();
 
         try {
@@ -72,7 +69,7 @@ public class OtherService {
 
             if (statement != null) {
 
-                ResultSet results = database.executeQuery(statement);
+                ResultSet results = databaseConnection.executeQuery(statement);
 
                 if (results != null) {
                     while (results.next()) {
@@ -93,11 +90,11 @@ public class OtherService {
         return songs;
     }
 
-    public static ArrayList<Song> searchPlaylistSongs(int playlistID, String criteria, String criteriaType, DatabaseConnection database)
+    public static ArrayList<Song> searchPlaylistSongs(int playlistID, String criteria, String criteriaType)
     {
 
         ArrayList<Song> songs = new ArrayList<>();
-        PreparedStatement statement = database.newStatement("SELECT Songs.FileURL as 'b',\n" +
+        PreparedStatement statement = databaseConnection.newStatement("SELECT Songs.FileURL as 'b',\n" +
                 "Songs.SongTitle as 'c', \n" +
                 "Songs.SongAlbum as 'd', \n" +
                 "Songs.Artist as 'e',\n" +
@@ -115,7 +112,7 @@ public class OtherService {
 
             if (statement != null) {
 
-                ResultSet results = database.executeQuery(statement);
+                ResultSet results = databaseConnection.executeQuery(statement);
 
                 if (results != null) {
                     while (results.next()) {

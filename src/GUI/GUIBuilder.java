@@ -262,7 +262,7 @@ public class GUIBuilder {
                 Playlist seletedPlaylist = null;
                 if ((seletedPlaylist = playlists.getSelectionModel().getSelectedItem()) != null && event.getClickCount() == 2)
                 {
-                    ArrayList<Song> songs = DatabaseFunctionality.loadFromPlaylist(seletedPlaylist.getPlaylistID(), gui);
+                    ArrayList<Song> songs = DatabaseFunctionality.loadFromPlaylist(seletedPlaylist.getPlaylistID());
                     AudioFunctionality.setPlaylist(songs);
                 }
             }

@@ -2,7 +2,7 @@ package Database.ServiceClasses;
 
 import Database.DatabaseConnection;
 import Database.ObjectModels.Playlist;
-
+import static Main.Main.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,9 +11,9 @@ import java.util.List;
 
 public class PlaylistService {
 
-    public static ArrayList<Playlist> selectAll(DatabaseConnection database) {
+    public static ArrayList<Playlist> selectAll() {
 
-        PreparedStatement statement = database.newStatement("SELECT Playlists.PlaylistID ,Playlists.PlaylistName,Playlists.PlaylistCreator,COUNT(PlaylistSongs.SongID) FROM Playlists \n" +
+        PreparedStatement statement = databaseConnection.newStatement("SELECT Playlists.PlaylistID ,Playlists.PlaylistName,Playlists.PlaylistCreator,COUNT(PlaylistSongs.SongID) FROM Playlists \n" +
                 "INNER JOIN PlaylistSongs on Playlists.PlaylistID = PlaylistSongs.PlaylistID \n" +
                 "GROUP BY playlistSongs.PlaylistID");
 
@@ -22,7 +22,7 @@ public class PlaylistService {
         try {
             if (statement != null) {
 
-                ResultSet results = database.executeQuery(statement);
+                ResultSet results = databaseConnection.executeQuery(statement);
 
                 if (results != null) {
                     while (results.next()) {
@@ -37,11 +37,11 @@ public class PlaylistService {
         return targetList;
     }
 
-    public static Playlist selectById(int id, DatabaseConnection database) {
+    public static Playlist selectById(int id) {
 
         Playlist result = null;
 
-        PreparedStatement statement = database.newStatement("SELECT Playlists.PlaylistID ,Playlists.PlaylistName,Playlists.PlaylistCreator,COUNT(PlaylistSongs.SongID) FROM Playlists \n" +
+        PreparedStatement statement = databaseConnection.newStatement("SELECT Playlists.PlaylistID ,Playlists.PlaylistName,Playlists.PlaylistCreator,COUNT(PlaylistSongs.SongID) FROM Playlists \n" +
                 "INNER JOIN PlaylistSongs on Playlists.PlaylistID = PlaylistSongs.PlaylistID \n" +
                 "WHERE Playlists.PlaylistID = ? GROUP BY playlistSongs.PlaylistID");
 
@@ -49,7 +49,7 @@ public class PlaylistService {
             if (statement != null) {
 
                 statement.setInt(1, id);
-                ResultSet results = database.executeQuery(statement);
+                ResultSet results = databaseConnection.executeQuery(statement);
 
                 if (results != null) {
                     result = new Playlist(results.getInt("PlaylistID"), results.getString("PlaylistName"), results.getString("PlaylistCreator"), results.getInt("COUNT(PlaylistSongs.SongID)"));
@@ -62,39 +62,39 @@ public class PlaylistService {
         return result;
     }
 
-    public static void deleteById(int id, DatabaseConnection database) {
+    public static void deleteById(int id) {
 
-        PreparedStatement statement = database.newStatement("DELETE FROM Playlists WHERE PlaylistID = ?");
+        PreparedStatement statement = databaseConnection.newStatement("DELETE FROM Playlists WHERE PlaylistID = ?");
 
         try {
             if (statement != null) {
                 statement.setInt(1, id);
-                database.executeUpdate(statement);
+                databaseConnection.executeUpdate(statement);
             }
         } catch (SQLException resultsException) {
             System.out.println("Database deletion error: " + resultsException.getMessage());
         }
     }
 
-    public static void save(Playlist itemToSave, DatabaseConnection database) {
+    public static void save(Playlist itemToSave) {
 
         Playlist existingItem = null;
 
-        if (itemToSave.getPlaylistID() != 0) existingItem = selectById(itemToSave.getPlaylistID(), database);
+        if (itemToSave.getPlaylistID() != 0) existingItem = selectById(itemToSave.getPlaylistID());
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = database.newStatement("INSERT INTO Playlists (PlaylistName, PlaylistCreator) VALUES (?, ?))");
+                PreparedStatement statement = databaseConnection.newStatement("INSERT INTO Playlists (PlaylistName, PlaylistCreator) VALUES (?, ?))");
                 statement.setString(2, itemToSave.getPlayListName());
                 statement.setString(3, itemToSave.getPlaylistCreator());
-                database.executeUpdate(statement);
+                databaseConnection.executeUpdate(statement);
             }
             else {
-                PreparedStatement statement = database.newStatement("UPDATE Playlists SET PlaylistName = ?, PlaylistCreator = ? WHERE PlaylistID = ?");
+                PreparedStatement statement = databaseConnection.newStatement("UPDATE Playlists SET PlaylistName = ?, PlaylistCreator = ? WHERE PlaylistID = ?");
                 statement.setString(1, itemToSave.getPlayListName());
                 statement.setString(2, itemToSave.getPlaylistCreator());
                 statement.setInt(3,itemToSave.getPlaylistID());
-                database.executeUpdate(statement);
+                databaseConnection.executeUpdate(statement);
             }
         } catch (SQLException resultsException) {
             System.out.println("Database saving error: " + resultsException.getMessage());

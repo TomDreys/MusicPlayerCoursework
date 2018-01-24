@@ -2,42 +2,34 @@ package MainController;
 
 import AudioController.AudioController;
 import Database.ObjectModels.Song;
-import GUI.GUI;
 import java.util.ArrayList;
+import static Main.Main.*;
 
 public class AudioFunctionality {
-
-    private static AudioController audioController;
-    private static GUI gui;
-
-    public AudioFunctionality(AudioController audioController, GUI gui) {
-        this.audioController = audioController;
-        this.gui = gui;
-    }
 
     public static void togglePause()
     {
         boolean isPlaying = audioController.togglePauseSong();
-        if (isPlaying == false)
+        if (!isPlaying)
         {
-            gui.playButton.setText("Play");
+            mainGui.playButton.setText("Play");
         }
         else
         {
-            gui.playButton.setText("Pause");
+            mainGui.playButton.setText("Pause");
         }
     }
 
     public static void togglePlayMode()
     {
         boolean isPlaying = audioController.togglePlayMode();
-        if (isPlaying == false)
+        if (!isPlaying)
         {
-            gui.playModeButton.setText("Shuffle");
+            mainGui.playModeButton.setText("Shuffle");
         }
         else
         {
-            gui.playModeButton.setText("Loop");
+            mainGui.playModeButton.setText("Loop");
         }
     }
 

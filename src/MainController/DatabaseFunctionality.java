@@ -1,49 +1,41 @@
 package MainController;
 
-import Database.DatabaseConnection;
 import Database.ObjectModels.Playlist;
 import Database.ObjectModels.Song;
 import Database.ServiceClasses.OtherService;
 import Database.ServiceClasses.PlaylistService;
-import Database.ServiceClasses.SongService;
-import GUI.GUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import static Main.Main.*;
 
 import java.util.ArrayList;
 
 public class DatabaseFunctionality {
 
-    private static DatabaseConnection databaseConnection;
-
-    public DatabaseFunctionality(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
-    }
-
-    public void createNewPlaylist(String name, String creator, DatabaseConnection databaseConnection)
+    public void createNewPlaylist(String name, String creator)
     {
         Playlist playlist = new Playlist(0, name,creator,0);
-        PlaylistService.save(playlist, databaseConnection);
+        PlaylistService.save(playlist);
     }
 
-    public void addToPlaylist(String fileName, int playlistID, DatabaseConnection databaseConnection)
+    public void addToPlaylist(String fileName, int playlistID)
     {
 
     }
 
-    public static ArrayList<Song> loadFromPlaylist(int playlistID, GUI gui)
+    public static ArrayList<Song> loadFromPlaylist(int playlistID)
     {
-        ArrayList<Song> songs = OtherService.loadPlaylistSongs(playlistID,databaseConnection);
+        ArrayList<Song> songs = OtherService.loadPlaylistSongs(playlistID);
         ObservableList<Song> Olist = FXCollections.observableArrayList(songs);
-        gui.updateSongsTable(Olist);
+        mainGui.updateSongsTable(Olist);
         return songs;
     }
 
-    public static void loadPlaylists(DatabaseConnection databaseConnection, GUI gui)
+    public static void loadPlaylists()
     {
-        ArrayList playlists = PlaylistService.selectAll(databaseConnection);
+        ArrayList<Playlist> playlists = PlaylistService.selectAll();
         ObservableList<Playlist> Olist = FXCollections.observableArrayList(playlists);
-        gui.updatePlaylistsTable(Olist);
+        mainGui.updatePlaylistsTable(Olist);
     }
 
     public void deleteSong()
