@@ -37,7 +37,7 @@ public class DatabaseFunctionality {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate localDate = LocalDate.now();
         String currentDate = dtf.format(localDate);
-        
+
         Song newSong = new Song(0,
                 fileName,
                 metadata.get("title").toString(),
