@@ -4,6 +4,8 @@ import Database.ObjectModels.Song;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
@@ -91,9 +93,21 @@ public class AudioController {
 
     }
 
-    public static void setProgress()
+    public static double getSongProgress()
     {
+        if (mediaPlayer == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return mediaPlayer.getCurrentTime().toMillis() / mediaPlayer.getTotalDuration().toMillis();
+        }
+    }
 
+    public static void setSongProgress(double time)
+    {
+        mediaPlayer.seek(new Duration(time));
     }
 
     public static void setCurrentPlaylistSongs(ArrayList<Song> currentPlaylistSongs) {

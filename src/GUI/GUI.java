@@ -14,6 +14,8 @@ public class GUI {
     public static Button channelButton;
     public static Button playButton;
     public static Button playModeButton;
+    public static Label songTitleLabel;
+    public static ProgressBar songProgressBar;
 
     //attributes that need their data read
     public static Slider volumeSlider;
@@ -30,42 +32,6 @@ public class GUI {
     public static Slider equalizerSlider8;
     public static Slider equalizerSlider9;
     public static Slider equalizerSlider10;
-
-    public static void togglePlayButton()
-    {
-        if (playButton.getText() == "Pause")
-        {
-            playButton.setText("Play");
-        }
-        else
-        {
-            playButton.setText("Pause");
-        }
-    }
-
-    public static void togglePlayModeButton()
-    {
-        if (playModeButton.getText() == "Shuffle")
-        {
-            playModeButton.setText("Loop");
-        }
-        else
-        {
-            playModeButton.setText("Shuffle");
-        }
-    }
-
-    public static void toggleChannelButton()
-    {
-        if (channelButton.getText() == "Mono")
-        {
-            channelButton.setText("Stereo");
-        }
-        else
-        {
-            channelButton.setText("Mono");
-        }
-    }
 
     public static void updateSongsTable(ObservableList<Song> songs)
     {

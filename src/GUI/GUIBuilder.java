@@ -1,5 +1,6 @@
 package GUI;
 
+import AudioController.AudioController;
 import Database.ObjectModels.Playlist;
 import Database.ObjectModels.Song;
 import MainController.AudioFunctionality;
@@ -20,8 +21,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static Main.Main.audioController;
 
 public class GUIBuilder {
 
@@ -93,6 +97,7 @@ public class GUIBuilder {
                 if ((seletedSong = songs.getSelectionModel().getSelectedItem()) != null && event.getClickCount() == 2)
                 {
                     AudioFunctionality.playSong(seletedSong.getFileURL());
+                    gui.songTitleLabel.setText(seletedSong.getSongTitle() + " - " + seletedSong.getSongArtist());
                 }
             }
         });
@@ -295,7 +300,10 @@ public class GUIBuilder {
         VBox controlPanel = new VBox();
         controlPanel.setAlignment(Pos.CENTER);
         controlPanel.setSpacing(30);
-        controlPanel.setPadding(new Insets(50,0,0,0));
+        controlPanel.setPadding(new Insets(30,0,0,0));
+
+        Label songTitleLabel = new Label("");
+        gui.songTitleLabel = songTitleLabel;
 
         HBox playButtons = createPlayButtons();
 
@@ -312,6 +320,7 @@ public class GUIBuilder {
 
         ProgressBar songProgress = new ProgressBar();
         songProgress.setMinWidth(200);
+        gui.songProgressBar = songProgress;
 
         Slider volumeSlider = new Slider();
         volumeSlider.setMaxWidth(220);
@@ -325,6 +334,7 @@ public class GUIBuilder {
             }
         });
 
+        controlPanel.getChildren().add(songTitleLabel);
         controlPanel.getChildren().add(playButtons);
         controlPanel.getChildren().add(playModeButton);
         controlPanel.getChildren().add(songProgress);

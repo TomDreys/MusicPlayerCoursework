@@ -5,8 +5,13 @@ import AudioController.AudioController;
 import Database.DatabaseConnection;
 import GUI.GUI;
 import MainController.DatabaseFunctionality;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Main extends Application{
 
@@ -21,10 +26,20 @@ public class Main extends Application{
     @Override
     public void start (Stage primaryStage) throws Exception {
 
-        mainGui = createGUI(primaryStage);
         databaseConnection = new DatabaseConnection("src/MusicPlayer.db");
         audioController = new AudioController();
+        mainGui = createGUI(primaryStage);
 
         DatabaseFunctionality.loadPlaylists();
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    mainGui.songProgressBar.setProgress(audioController.getSongProgress());
+                });
+            }
+        },500,500);
     }
 }
