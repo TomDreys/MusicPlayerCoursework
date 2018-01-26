@@ -5,7 +5,6 @@ import AudioController.AudioController;
 import Database.DatabaseConnection;
 import GUI.GUI;
 import MainController.DatabaseFunctionality;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;

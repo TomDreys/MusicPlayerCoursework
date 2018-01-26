@@ -32,6 +32,7 @@ public class GUI {
     public static Slider equalizerSlider8;
     public static Slider equalizerSlider9;
     public static Slider equalizerSlider10;
+    public static int currentPlaylistID;
 
     public static void updateSongsTable(ObservableList<Song> songs)
     {

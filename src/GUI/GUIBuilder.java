@@ -1,6 +1,5 @@
 package GUI;
 
-import AudioController.AudioController;
 import Database.ObjectModels.Playlist;
 import Database.ObjectModels.Song;
 import MainController.AudioFunctionality;
@@ -20,16 +19,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import static Main.Main.audioController;
 
 public class GUIBuilder {
 
     private static GUI gui = new GUI();
+    private static Stage primaryStage;
 
     public static GUI createGUI(Stage primaryStage) {
 
@@ -39,6 +38,7 @@ public class GUIBuilder {
 
         Scene scene = new Scene(root, 1024, 768);
 
+        GUIBuilder.primaryStage = primaryStage;
         primaryStage.setTitle("Music Player");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
@@ -170,6 +170,18 @@ public class GUIBuilder {
 
         Button addNewSongButton = new Button();
         addNewSongButton.setText("Add Song");
+        FileChooser fileChooser = new FileChooser();
+        addNewSongButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                File file = fileChooser.showOpenDialog(primaryStage);
+                if (file != null) {
+                    DatabaseFunctionality.addToPlaylist(file,gui.currentPlaylistID);
+                }
+            }
+        });
+
+
         VBox newSongVbox = new VBox();
         newSongVbox.setAlignment(Pos.TOP_RIGHT);
         newSongVbox.getChildren().add(addNewSongButton);
@@ -267,6 +279,7 @@ public class GUIBuilder {
                 if ((seletedPlaylist = playlists.getSelectionModel().getSelectedItem()) != null && event.getClickCount() == 2)
                 {
                     ArrayList<Song> songs = DatabaseFunctionality.loadFromPlaylist(seletedPlaylist.getPlaylistID());
+                    gui.currentPlaylistID = seletedPlaylist.getPlaylistID();
                     AudioFunctionality.setPlaylist(songs);
                 }
             }

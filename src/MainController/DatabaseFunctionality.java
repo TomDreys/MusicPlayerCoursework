@@ -28,29 +28,48 @@ public class DatabaseFunctionality {
         PlaylistService.save(playlist);
     }
 
-    public void addToPlaylist(String fileName, int playlistID)
+    public static void addToPlaylist(File file, int playlistID)
     {
-        File songFile = new File(fileName);
-        Media songMedia = new Media(songFile.toURI().toString());
-        ObservableMap<java.lang.String,java.lang.Object> metadata = songMedia.getMetadata();
+        Media songMedia = new Media(file.toURI().toString());
+        if (file.toString().endsWith(".mp3"))
+        {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDate localDate = LocalDate.now();
+            String currentDate = dtf.format(localDate);
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDate localDate = LocalDate.now();
-        String currentDate = dtf.format(localDate);
+            Song existingSong = SongService.selectByFile(file.getPath());
 
-        Song newSong = new Song(0,
-                fileName,
-                metadata.get("title").toString(),
-                metadata.get("album").toString(),
-                metadata.get("artist").toString(),
-                metadata.get("year").toString(),
-                Integer.parseInt(metadata.get("track number").toString()),
-                currentDate);
+            if (existingSong == null)
+            {
+                ObservableMap<java.lang.String,java.lang.Object> metadata = songMedia.getMetadata();
 
-        SongService.save(newSong);
-        PlaylistSong playlistSong = new PlaylistSong(SongService.selectByFile(fileName).getSongID(),
-                                                    playlistID,currentDate);
-        PlaylistSongService.save(playlistSong);
+                Song newSong = new Song(0,
+                        file.getPath(),
+                        metadata.get("title").toString(),
+                        metadata.get("album").toString(),
+                        metadata.get("artist").toString(),
+                        metadata.get("year").toString(),
+                        Integer.parseInt(metadata.get("track number").toString()),
+                        currentDate);
+
+                SongService.save(newSong);
+                PlaylistSong playlistSong = new PlaylistSong(SongService.selectByFile(file.getPath()).getSongID(),
+                        playlistID,currentDate);
+                PlaylistSongService.save(playlistSong);
+            }
+            else
+            {
+                int songId = existingSong.getSongID();
+                PlaylistSong playlistSong = new PlaylistSong(songId, playlistID, currentDate);
+                PlaylistSongService.save(playlistSong);
+            }
+
+        }
+        else
+        {
+
+        }
+
     }
 
     public static ArrayList<Song> loadFromPlaylist(int playlistID)
