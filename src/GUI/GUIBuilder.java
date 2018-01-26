@@ -2,6 +2,7 @@ package GUI;
 
 import Database.ObjectModels.Playlist;
 import Database.ObjectModels.Song;
+import Main.Main;
 import MainController.AudioFunctionality;
 import MainController.DatabaseFunctionality;
 import javafx.beans.value.ChangeListener;
@@ -21,6 +22,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -43,6 +46,12 @@ public class GUIBuilder {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Main.timer.cancel();
+            }
+        });
         primaryStage.show();
 
         return mainGUI;

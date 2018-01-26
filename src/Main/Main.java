@@ -17,6 +17,7 @@ public class Main extends Application{
     public static GUI mainGui;
     public static DatabaseConnection databaseConnection;
     public static AudioController audioController;
+    public static Timer timer;
 
     public static void main(String[] args) {
         launch();
@@ -31,7 +32,7 @@ public class Main extends Application{
 
         DatabaseFunctionality.loadPlaylists();
 
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
