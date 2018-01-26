@@ -1,6 +1,8 @@
 package MainController;
 
 import Database.ObjectModels.Song;
+import Database.ServiceClasses.SongService;
+
 import java.util.ArrayList;
 import static Main.Main.*;
 
@@ -32,7 +34,10 @@ public class AudioFunctionality {
         }
     }
 
-    public static void playSong(String filename) { audioController.playSong(filename);}
+    public static void playSong(String filename)
+    {
+        audioController.playSong(filename);
+    }
 
     public static void rewindSong()
     {
