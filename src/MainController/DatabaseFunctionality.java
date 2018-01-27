@@ -7,10 +7,17 @@ import Database.ServiceClasses.OtherService;
 import Database.ServiceClasses.PlaylistService;
 import Database.ServiceClasses.PlaylistSongService;
 import Database.ServiceClasses.SongService;
+import com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl;
+import com.sun.org.apache.xpath.internal.WhitespaceStrippingElementMatcher;
+import com.sun.org.apache.xpath.internal.functions.FuncFalse;
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
+import sun.plugin2.message.GetAppletMessage;
 
 import static Main.Main.*;
 
@@ -19,6 +26,7 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class DatabaseFunctionality {
 
@@ -31,6 +39,7 @@ public class DatabaseFunctionality {
     public static void addToPlaylist(File file, int playlistID)
     {
         Media songMedia = new Media(file.toURI().toString());
+
         if (file.toString().endsWith(".mp3"))
         {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -41,21 +50,29 @@ public class DatabaseFunctionality {
 
             if (existingSong == null)
             {
-                ObservableMap<java.lang.String,java.lang.Object> metadata = songMedia.getMetadata();
+                MediaPlayer player = new MediaPlayer(songMedia);
 
-                Song newSong = new Song(0,
-                        file.getPath(),
-                        metadata.get("title").toString(),
-                        metadata.get("album").toString(),
-                        metadata.get("artist").toString(),
-                        metadata.get("year").toString(),
-                        Integer.parseInt(metadata.get("track number").toString()),
-                        currentDate);
+                player.setOnReady(new Runnable() {
+                    @Override
+                    public void run() {
 
-                SongService.save(newSong);
-                PlaylistSong playlistSong = new PlaylistSong(SongService.selectByFile(file.getPath()).getSongID(),
-                        playlistID,currentDate);
-                PlaylistSongService.save(playlistSong);
+                        ObservableMap<java.lang.String,java.lang.Object> metadata = songMedia.getMetadata();
+
+                        Song newSong = new Song(0,
+                                file.getPath(),
+                                metadata.get("title").toString(),
+                                metadata.get("album").toString(),
+                                metadata.get("artist").toString(),
+                                metadata.get("year").toString(),
+                                Integer.parseInt(metadata.get("track number").toString()),
+                                currentDate);
+
+                        SongService.save(newSong);
+                        PlaylistSong playlistSong = new PlaylistSong(SongService.selectByFile(file.getPath()).getSongID(),
+                                playlistID,currentDate);
+                        PlaylistSongService.save(playlistSong);
+                    }
+                });
             }
             else
             {

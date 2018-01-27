@@ -25,7 +25,7 @@ public class PlaylistSongService {
                 }
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database select all error: " + resultsException.getMessage());
+            System.out.println("PlaylistSong Database select all error: " + resultsException.getMessage());
         }
     }
 
@@ -47,7 +47,7 @@ public class PlaylistSongService {
                 }
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database select by id error: " + resultsException.getMessage());
+            System.out.println("PlaylistSong Database select by id error: " + resultsException.getMessage());
         }
 
         return result;
@@ -64,7 +64,7 @@ public class PlaylistSongService {
                 databaseConnection.executeUpdate(statement);
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database deletion error: " + resultsException.getMessage());
+            System.out.println("PlaylistSong Database deletion error: " + resultsException.getMessage());
         }
     }
 
@@ -76,7 +76,7 @@ public class PlaylistSongService {
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = databaseConnection.newStatement("INSERT INTO PlaylistSongs (PlaylistID, SongID, AddDate) VALUES (?, ?, ?))");
+                PreparedStatement statement = databaseConnection.newStatement("INSERT INTO PlaylistSongs (PlaylistID, SongID, AddDate) VALUES (?, ?, ?)");
                 statement.setInt(1, itemToSave.getPlaylistID());
                 statement.setInt(2, itemToSave.getSongID());
                 statement.setString(3, itemToSave.getAddDate());
@@ -90,7 +90,7 @@ public class PlaylistSongService {
                 databaseConnection.executeUpdate(statement);
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database saving error: " + resultsException.getMessage());
+            System.out.println("PlaylistSong Database saving error: " + resultsException.getMessage());
         }
     }
 }

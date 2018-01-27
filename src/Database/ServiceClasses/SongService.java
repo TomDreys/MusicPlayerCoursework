@@ -31,7 +31,7 @@ public class SongService {
                 }
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database select all error: " + resultsException.getMessage());
+            System.out.println("Song Database select all error: " + resultsException.getMessage());
         }
     }
 
@@ -59,7 +59,7 @@ public class SongService {
                 }
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database select by id error: " + resultsException.getMessage());
+            System.out.println("Song Database select by id error: " + resultsException.getMessage());
         }
 
         return result;
@@ -88,7 +88,9 @@ public class SongService {
                 }
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database select by file error: " + resultsException.getMessage());
+            System.out.println("Song Database select by file error: " + resultsException.getMessage());
+            System.out.println("Record does not exist");
+            return null;
         }
 
         return result;
@@ -104,7 +106,7 @@ public class SongService {
                 databaseConnection.executeUpdate(statement);
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database deletion error: " + resultsException.getMessage());
+            System.out.println("Song Database deletion error: " + resultsException.getMessage());
         }
     }
 
@@ -115,26 +117,28 @@ public class SongService {
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = databaseConnection.newStatement("INSERT INTO Songs  (FileURL, SongTitle, SongAlbum, ReleaseYear, TrackNumber) VALUES (?, ?, ?, ?, ?))");
-                statement.setString(2, itemToSave.getFileURL());
-                statement.setString(3, itemToSave.getSongTitle());
-                statement.setString(4, itemToSave.getSongAlbum());
+                PreparedStatement statement = databaseConnection.newStatement("INSERT INTO Songs  (FileURL, SongTitle, SongAlbum, SongAlbum = ?,ReleaseYear, TrackNumber) VALUES (?, ?, ?, ?, ?)");
+                statement.setString(1, itemToSave.getFileURL());
+                statement.setString(2, itemToSave.getSongTitle());
+                statement.setString(3, itemToSave.getSongAlbum());
+                statement.setString(4, itemToSave.getSongArtist());
                 statement.setString(5, itemToSave.getReleaseYear());
                 statement.setInt(6, itemToSave.getTrackNumber());
                 databaseConnection.executeUpdate(statement);
             }
             else {
-                PreparedStatement statement = databaseConnection.newStatement("UPDATE Songs SET FileURL = ?, SongTitle = ?, SongAlbum = ?, ReleaseYear = ?, TrackNumber = ? WHERE songID = ?");
+                PreparedStatement statement = databaseConnection.newStatement("UPDATE Songs SET FileURL = ?, SongTitle = ?, SongAlbum = ?, SongArtist = ?,ReleaseYear = ?, TrackNumber = ? WHERE songID = ?");
                 statement.setString(1, itemToSave.getFileURL());
                 statement.setString(2, itemToSave.getSongTitle());
                 statement.setString(3, itemToSave.getSongAlbum());
-                statement.setString(4, itemToSave.getReleaseYear());
-                statement.setInt(5, itemToSave.getTrackNumber());
-                statement.setInt(6, itemToSave.getSongID());
+                statement.setString(4,itemToSave.getSongArtist());
+                statement.setString(5, itemToSave.getReleaseYear());
+                statement.setInt(6, itemToSave.getTrackNumber());
+                statement.setInt(7, itemToSave.getSongID());
                 databaseConnection.executeUpdate(statement);
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database saving error: " + resultsException.getMessage());
+            System.out.println("Song Database saving error: " + resultsException.getMessage());
         }
     }
 }
