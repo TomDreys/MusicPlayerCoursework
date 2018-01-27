@@ -42,7 +42,7 @@ public class DatabaseFunctionality {
 
         if (file.toString().endsWith(".mp3"))
         {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.now();
             String currentDate = dtf.format(localDate);
 

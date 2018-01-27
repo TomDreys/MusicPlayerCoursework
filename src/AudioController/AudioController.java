@@ -116,7 +116,7 @@ public class AudioController {
 
     public static void playSong(String fileURL)
     {
-        File songFile = new File(fileURL + ".mp3");
+        File songFile = new File(fileURL);
         if (songFile.isFile())
         {
             Media songMedia = new Media(songFile.toURI().toString());

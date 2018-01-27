@@ -117,17 +117,17 @@ public class SongService {
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = databaseConnection.newStatement("INSERT INTO Songs  (FileURL, SongTitle, SongAlbum, SongAlbum = ?,ReleaseYear, TrackNumber) VALUES (?, ?, ?, ?, ?)");
+                PreparedStatement statement = databaseConnection.newStatement("INSERT INTO Songs  (FileURL, SongTitle, Artist, SongAlbum, ReleaseYear, TrackNumber) VALUES (?, ?, ?, ?, ?, ?)");
                 statement.setString(1, itemToSave.getFileURL());
                 statement.setString(2, itemToSave.getSongTitle());
-                statement.setString(3, itemToSave.getSongAlbum());
-                statement.setString(4, itemToSave.getSongArtist());
+                statement.setString(3, itemToSave.getSongArtist());
+                statement.setString(4, itemToSave.getSongAlbum());
                 statement.setString(5, itemToSave.getReleaseYear());
                 statement.setInt(6, itemToSave.getTrackNumber());
                 databaseConnection.executeUpdate(statement);
             }
             else {
-                PreparedStatement statement = databaseConnection.newStatement("UPDATE Songs SET FileURL = ?, SongTitle = ?, SongAlbum = ?, SongArtist = ?,ReleaseYear = ?, TrackNumber = ? WHERE songID = ?");
+                PreparedStatement statement = databaseConnection.newStatement("UPDATE Songs SET FileURL = ?, SongTitle = ?, SongAlbum = ?, Artist = ?,ReleaseYear = ?, TrackNumber = ? WHERE songID = ?");
                 statement.setString(1, itemToSave.getFileURL());
                 statement.setString(2, itemToSave.getSongTitle());
                 statement.setString(3, itemToSave.getSongAlbum());
